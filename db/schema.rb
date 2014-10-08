@@ -24,5 +24,4 @@ ActiveRecord::Schema.define(version: 20141008053005) do
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-
 end
