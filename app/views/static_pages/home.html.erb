@@ -1,12 +1,17 @@
 <h1>Budgie</h1>
 
-<div id="forms">
-	<form name="input" action="form_action.asp" method="get">
-		Username: <input type="text" name="user">
-		Password: <input type="password" name="pwd">
-		<input type="submit" value="sign in">
-	</form>
-</div>
+<%= render 'shared/login_message' %>
 
+<%= form_for(:session) do |f|%>
+            <%= f.label "email"%>
+            <%= f.text_field :email %>
+            <%= f.label "password" %>
+            <%= f.password_field :password %>
+            <br>
+            <%= f.submit "sign in", class: "btn-inverse btn-large btn-primary" %>
+            <% if signed_in? %>
+            <%= link_to "Sign Out", signout_path, method: "delete" %>
+            <% end %>
+<% end %>
 <p>or <a href="users/new">create account</a></p>
 <p><a href="#">forgot password?</a></p>

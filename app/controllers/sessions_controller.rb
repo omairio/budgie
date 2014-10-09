@@ -1,15 +1,12 @@
 class SessionsController < ApplicationController
    include SessionsHelper
    def new
+      redirect_to root_path
    end
    def create
       @error=''
-      id = params[:session][:position].split
-      id.each do |i|
-         i.capitalize!
-      end
-      id = id.join(' ')
-      user = User.find_by_position(id)
+      id = params[:session][:email]
+      user = User.find_by(email: id)
       if (user && user.authenticate(params[:session][:password]))
          sign_in user
          redirect_to root_path
@@ -19,7 +16,7 @@ class SessionsController < ApplicationController
          elsif (!user.authenticate(params[:session][:password]))
             @error = "Tsk tsk."
          end
-         render 'new'
+         redirect_to root_path
       end
 
    end
