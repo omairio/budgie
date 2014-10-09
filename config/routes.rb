@@ -1,14 +1,11 @@
 Budgie::Application.routes.draw do
 
-  get "transactions/new"
-  get "transactions/create"
-  get "transactions/update"
-  get "transactions/destroy"
-  get "transactions/edit"
-  match '/home', to: 'static_pages#home', via: 'get'
-  match '/about', to: 'static_pages#about', via: 'get'
-  match '/signup', to: 'users#new', via: 'get'
-  root 'static_pages#home'
+ resources :users
+ resources :transactions
+ match '/home', to: 'static_pages#home', via: 'get'
+ match '/about', to: 'static_pages#about', via: 'get'
+ match '/signup', to: 'users#new', via: 'get'
+ root 'static_pages#home'
   # get "static_pages/home"
   # get "static_pages/about"
   # The priority is based upon order of creation: first created -> highest priority.
