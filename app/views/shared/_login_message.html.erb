@@ -1,0 +1,12 @@
+<% if signed_in? %>
+  <div id="success_explanation">
+    <div class="alert alert-success">
+    Sick login, <%= @user.first_name %>!
+    </div>
+  </div>
+
+<% elsif !@error.blank?%>
+   <div class="alert alert-error", style="text-align:center;"><%= @error %></div>
+<% else %>
+poop
+<% end %>
