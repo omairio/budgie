@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008053005) do
+ActiveRecord::Schema.define(version: 20141008233623) do
+
+  create_table "transactions", force: true do |t|
+    t.float    "amount"
+    t.integer  "user_id"
+    t.string   "category"
+    t.datetime "date"
+    t.integer  "day_spread"
+    t.float    "per_day"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -24,4 +36,5 @@ ActiveRecord::Schema.define(version: 20141008053005) do
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
 end
