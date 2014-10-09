@@ -5,6 +5,7 @@ Budgie::Application.routes.draw do
   get "transactions/update"
   get "transactions/destroy"
   get "transactions/edit"
+  get "transactions/show"
   match '/home', to: 'static_pages#home', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
   match '/signup', to: 'users#new', via: 'get'
