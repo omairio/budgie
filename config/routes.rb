@@ -7,9 +7,8 @@ Budgie::Application.routes.draw do
  match '/', to: 'sessions#destroy', via: 'delete'
  match '/about', to: 'static_pages#about', via: 'get'
  match '/signup', to: 'users#new', via: 'get'
+ 
  match '/signout', to: 'sessions#destroy', via: 'delete'
-
- # !!!!For debugging!!!!
  match '/signout', to: 'sessions#destroy', via: 'get'
 
 
