@@ -1,11 +1,10 @@
 Budgie::Application.routes.draw do
 
-root 'static_pages#home'
+ root 'sessions#new'
  resources :users
  resources :transactions
- match '/', to: 'sessions#create', via: 'post'
- match '/home', to: 'static_pages#home', via: 'get'
- # match '/', to: 'static_pages#home', via: 'post'
+ match '/', to: 'sessions#new', via: 'post'
+ match '/home', to: 'sessions#new', via: 'get'
  match '/about', to: 'static_pages#about', via: 'get'
  match '/signup', to: 'users#new', via: 'get'
  match '/signout', to: 'sessions#destroy', via: 'delete'
@@ -13,6 +12,7 @@ root 'static_pages#home'
 
   # get "static_pages/home"
   # get "static_pages/about"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
