@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
    include SessionsHelper
 
-
    # Sign in page
    def new
       if (signed_in?)
@@ -27,8 +26,10 @@ class SessionsController < ApplicationController
 
    # Sign out
    def destroy
-      sign_out
-      @message = "Successfully logged out"
-      render 'new'
+      if (signed_in?)
+         sign_out
+         @message = "Successfully logged out"
+      end
+      redirect_to root_path
    end
 end

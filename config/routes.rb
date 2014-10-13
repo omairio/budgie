@@ -10,7 +10,7 @@ Budgie::Application.routes.draw do
  match '/signout', to: 'sessions#destroy', via: 'delete'
 
  # !!!!For debugging!!!!
- # match '/signout', to: 'sessions#destroy', via: 'get'
+ match '/signout', to: 'sessions#destroy', via: 'get'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
