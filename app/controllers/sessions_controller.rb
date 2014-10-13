@@ -12,9 +12,9 @@ class SessionsController < ApplicationController
          redirect_to root_path
       else
          if (!user)
-            @error = "You don't belong here, do you?"
+            @error = "Username does not exist"
          elsif (!user.authenticate(params[:session][:password]))
-            @error = "Tsk tsk."
+            @error = "Password invalid"
          end
          redirect_to root_path
       end
