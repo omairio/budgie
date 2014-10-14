@@ -1,4 +1,7 @@
 class Transaction < ActiveRecord::Base
+
+	belongs_to :user
+	
 	validates(:amount, { 
 		presence: true, 
 		})
