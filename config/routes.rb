@@ -1,17 +1,24 @@
 Budgie::Application.routes.draw do
 
- root 'sessions#new'
- resources :users
- resources :transactions
- match '/', to: 'sessions#create', via: 'post'
- match '/', to: 'sessions#destroy', via: 'delete'
- match '/about', to: 'static_pages#about', via: 'get'
- match '/signup', to: 'users#new', via: 'get'
- 
- match '/signout', to: 'sessions#destroy', via: 'delete'
- match '/signout', to: 'sessions#destroy', via: 'get'
+  root 'sessions#new'
+  resources :users
+  resources :transactions
+  match '/', to: 'sessions#create', via: 'post'
+  match '/', to: 'sessions#destroy', via: 'delete'
+  match '/about', to: 'static_pages#about', via: 'get'
+  match '/signup', to: 'users#new', via: 'get'
 
- 
+  match '/myaccount', to: 'users#edit', via: 'get'
+  match '/myaccount', to: 'users#update', via: 'post'
+
+  match '/new_transaction', to: 'transactions#new', via: 'get'
+  match '/edit_transaction', to: 'transactions#edit', via: 'get'
+  match '/edit_transaction', to: 'transactions#destroy', via: 'delete'
+
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/signout', to: 'sessions#destroy', via: 'get'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,2 +1,30 @@
+<% provide(:title, 'Add Transaction') %>
+
 <h1>Transactions#new</h1>
 <p>Find me in app/views/transactions/new.html.erb</p>
+
+<%= form_for(@transaction) do |f| %>
+<%= render 'shared/error_messages' %>
+<%= f.text_field :amount, placeholder: "amount" %>
+
+<%= f.text_field :date, :class => 'datepicker' %>
+
+<div class="input-group date">
+  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div>
+
+<script type="text/javascript">
+$('#sandbox-container .input-group.date').datepicker({
+    format: "dd/mm/yyy"
+});
+</script>
+
+<%= f.text_field :day_spread, placeholder: "day spread" %>
+
+<%= f.text_field :category, placeholder: "category thing" %>
+
+<%= f.text_field :description, placeholder: "description" %>
+
+<%= f.submit "Enter Transaction", class: "btn btn-large btn-primary" %>
+
+<% end %>
