@@ -1,27 +1,35 @@
 class SessionsController < ApplicationController
    include SessionsHelper
+
+   # Sign in page
    def new
-      redirect_to root_path
+      if (signed_in?)
+         @user = current_user
+      end
    end
+
    def create
-      @error=''
       id = params[:session][:email]
       user = User.find_by(email: id)
       if (user && user.authenticate(params[:session][:password]))
+         @error = "Poop"
          sign_in user
-         redirect_to root_path
       else
          if (!user)
             @error = "Username does not exist"
          elsif (!user.authenticate(params[:session][:password]))
             @error = "Password invalid"
          end
-         redirect_to root_path
       end
-
+      render 'new'
    end
+
+   # Sign out
    def destroy
-      sign_out
+      if (signed_in?)
+         sign_out
+         @message = "Successfully logged out"
+      end
       redirect_to root_path
    end
 end

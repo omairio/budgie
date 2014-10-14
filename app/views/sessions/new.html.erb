@@ -2,10 +2,13 @@
 
 <%= render 'shared/login_message' %>
             <% if signed_in? %>
+
             <%= link_to "Sign Out", signout_path, method: "delete" %>
 <p><a href="#">Add transaction</a></p>
 <p><a href="#">Change Account Details</a></p>
+
             <% else %>
+
            <%= form_for(:session) do |f|%>
            	 <%= f.label "email"%>
            	 <%= f.text_field :email %>
@@ -15,6 +18,6 @@
            	 <%= f.submit "sign in", class: "btn-inverse btn-large btn-primary" %>
             <% end %>
 
-<p>or <a href="users/new">create account</a></p>
+<%= link_to "Create Account", signup_path, method: "get" %>
 <p><a href="#">forgot password?</a></p>
             <% end %>

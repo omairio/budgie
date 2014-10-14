@@ -3,10 +3,11 @@ Budgie::Application.routes.draw do
  root 'sessions#new'
  resources :users
  resources :transactions
- match '/', to: 'sessions#new', via: 'post'
- match '/home', to: 'sessions#new', via: 'get'
+ match '/', to: 'sessions#create', via: 'post'
+ match '/', to: 'sessions#destroy', via: 'delete'
  match '/about', to: 'static_pages#about', via: 'get'
  match '/signup', to: 'users#new', via: 'get'
+ 
  match '/signout', to: 'sessions#destroy', via: 'delete'
  match '/signout', to: 'sessions#destroy', via: 'get'
 

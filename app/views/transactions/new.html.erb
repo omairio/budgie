@@ -1,22 +1,28 @@
+<% provide(:title, 'New Transaction') %>
+
 <h1>Transactions#new</h1>
 <p>Find me in app/views/transactions/new.html.erb</p>
 
-<form name="transactionInfo" action="form_action.asp" method="get">
-	Amount: <input type="number" step="0.01" min="0" name="amount"> <br>
-	Category: <select name="category">
-		<option value="food">Food & Drink</option>
+<%= form name="transactionInfo" action="form_action.asp" method="get" %>
+
+	<%= Amount: <input type="number" step="0.01" min="0" name="amount" %>
+
+	<%= Category: <select name="category" %>
+		<option value="food">Food &amp; Drink</option>
 		<option value="tansport">Transport</option>
 		<option value="housing">Housing</option>
 		<option value="utility">Utility Bill</option>
 		<option value="communication">Communication</option>
 		<option value="health">Health</option>
 		<option value="education">Education</option>
-		<option value="clothing">Clothing & Footwear</option>
+		<option value="clothing">Clothing &amp; Footwear</option>
 		<option value="recreation">Recreation</option>
 		<option value="pets">Pets</option>
 		<option value="other">Other</option>
-	</select> <br>
-	Date: <input type="date" name="transDate"> <br>
-	Description: <input type="text" name="decription"> <br>
-	<input type="submit" value="Add new transaction"> <br>
-</form>
+	<%= select %>
+
+	<%= Date: <input type="date" name="transDate" %>
+	<%= Description: <input type="text" name="decription" %>
+	<%= input type="submit" value="Add new transaction" %>
+
+<%= form %>
