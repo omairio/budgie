@@ -7,19 +7,31 @@
 <%= render 'shared/error_messages' %>
 <%= f.text_field :amount, placeholder: "amount" %>
 
-<%= f.text_field :date, :class => 'datepicker' %>
+<%= f.text_field :date, :class => 'datepicker', placeholder: "dd/mm/yyyy"%>
 
-<div class="input-group date">
-  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-</div>
+<input type="text" class='datepicker' >
 
 <script type="text/javascript">
-$('#sandbox-container .input-group.date').datepicker({
-    format: "dd/mm/yyy"
-});
+	$(document).ready(function(){
+		$('.datepicker').datepicker();
+	});
 </script>
 
+
+<br>
 <%= f.text_field :day_spread, placeholder: "day spread" %>
+
+<span class="select2-container form-control select select-primary">
+<select id="transaction_spread_type" name="transaction[spread_type]">
+<option value="1">Day</option>
+<option value="2">Week</option>
+<option value="3">Month</option>
+<option value="4">Year</option>
+</select>
+</span>
+<br>
+
+<br>
 
 <%= f.text_field :category, placeholder: "category thing" %>
 

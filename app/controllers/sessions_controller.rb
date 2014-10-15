@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
    def new
       if (signed_in?)
          @user = current_user
+         @transactions = @user.transactions
       end
    end
 
