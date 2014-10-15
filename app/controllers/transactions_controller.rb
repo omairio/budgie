@@ -32,28 +32,34 @@ class TransactionsController < ApplicationController
   end
 
   def update
-  end
-
-  def destroy
-    if (signed_in?)
-      post = Post.find(params[:id])
-      if (current_user.id == post.user_id)
-        post.destroy
-      end
-    end
-    render 'show'
-  end
-
-  def edit
-    if (signed_in?)
-      post = Post.find(params[:id])
-      if (current_user.id == post.user_id)
-        post.destroy
-      end
+    @transaction = Transaction.find(params[:id])
+    if (@transaction.update_attributes(transaction_params))
+      redirect_to root_path
+    else
+      render 'edit'
     end
   end
 
   def show
+    destroy
+  end
+
+  def destroy
+    if (signed_in?)
+      transaction = Transaction.find(params[:id])
+      if (current_user.id == transaction.user_id)
+        transaction.destroy
+      end
+    end
+    redirect_to root_path
+  end
+
+  def edit
+    if (signed_in?)
+      @transaction = Transaction.find(params[:id])
+      if (current_user.id == @transaction.user_id)
+      end
+    end
   end
 
   private
