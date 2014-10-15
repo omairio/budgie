@@ -25,9 +25,22 @@
 </span>
 <br>
 
+<span class="select2-container form-control select select-primary">
+<select id="transaction_category" name="transaction[category]">
+<option selected disabled="category">category</option>
+<option value="Food+Drink">Food &amp; Drink</option>
+<option value="Alcohol+Tabacco">Alcohol &amp; Tobacco</option>
+<option value="Clothing+Footwear">Clothing &amp; Footwear</option>
+<option value="Electricity+Gas+Water">Electricity, Gas &amp; Water</option>
+<option value="Transport">Transport</option>
+<option value="Communication">Communication</option>
+<option value="Health">Health</option>
+<option value="Recreation">Recreation</option>
+<option value="Education">Education</option>
+<option value="Other">Other</option>
+</select>
+</span>
 <br>
-
-<%= f.text_field :category, placeholder: "category thing" %>
 
 <%= f.text_field :description, placeholder: "description" %>
 
