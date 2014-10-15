@@ -3,26 +3,28 @@
 <h1>Transactions#new</h1>
 <p>Find me in app/views/transactions/new.html.erb</p>
 
-<%= form name="transactionInfo" action="form_action.asp" method="get" %>
+<%= form_for(@transaction) do |f| %>
+<%= render 'shared/error_messages' %>
+<%= f.text_field :amount, placeholder: "amount" %>
 
-	<%= Amount: <input type="number" step="0.01" min="0" name="amount" %>
+<%= f.text_field :date, :class => 'datepicker' %>
 
-	<%= Category: <select name="category" %>
-		<option value="food">Food &amp; Drink</option>
-		<option value="tansport">Transport</option>
-		<option value="housing">Housing</option>
-		<option value="utility">Utility Bill</option>
-		<option value="communication">Communication</option>
-		<option value="health">Health</option>
-		<option value="education">Education</option>
-		<option value="clothing">Clothing &amp; Footwear</option>
-		<option value="recreation">Recreation</option>
-		<option value="pets">Pets</option>
-		<option value="other">Other</option>
-	<%= select %>
+<div class="input-group date">
+  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div>
 
-	<%= Date: <input type="date" name="transDate" %>
-	<%= Description: <input type="text" name="decription" %>
-	<%= input type="submit" value="Add new transaction" %>
+<script type="text/javascript">
+$('#sandbox-container .input-group.date').datepicker({
+    format: "dd/mm/yyy"
+});
+</script>
 
-<%= form %>
+<%= f.text_field :day_spread, placeholder: "day spread" %>
+
+<%= f.text_field :category, placeholder: "category thing" %>
+
+<%= f.text_field :description, placeholder: "description" %>
+
+<%= f.submit "Enter Transaction", class: "btn btn-large btn-primary" %>
+
+<% end %>

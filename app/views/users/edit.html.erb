@@ -1,7 +1,5 @@
-<% provide(:title, 'Sign up') %>
-
-<h1>Sign up</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, 'Account Info') %>
+<h1>Budgie</h1>
 
 <%= form_for(@user) do |f| %>
 <%= render 'shared/error_messages' %>
@@ -16,6 +14,6 @@
 
 <%= f.password_field :password_confirmation, placeholder: "enter password again"%>
 
-<%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+<%= f.submit "Update Account Info", class: "btn btn-large btn-primary" %>
 
 <% end %>

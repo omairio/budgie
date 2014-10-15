@@ -4,8 +4,9 @@
             <% if signed_in? %>
 
             <%= link_to "Sign Out", signout_path, method: "delete" %>
-<p><a href="#">Add transaction</a></p>
-<p><a href="#">Change Account Details</a></p>
+            
+ <%= link_to raw('<button class="btn btn-danger btn-lg" role="button">Add Transaction</button>'), new_transaction_path, method: "get" %>
+            <%= link_to raw('<button class="btn btn-inverse btn-lg" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
 
             <% else %>
 
