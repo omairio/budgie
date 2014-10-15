@@ -1,8 +1,9 @@
 <h1>Budgie</h1>
 
 <%= render 'shared/login_message' %>
-            <% if signed_in? %>
 
+<% if signed_in? %>
+<% @transactions = current_user.transactions %>
             <%= link_to "Sign Out", signout_path, method: "delete" %>
             
             <% if @transactions.nil? %>
@@ -24,18 +25,15 @@
 
  <%= link_to raw('<button class="btn btn-danger btn-lg" role="button">Add Transaction</button>'), new_transaction_path, method: "get" %>
             <%= link_to raw('<button class="btn btn-inverse btn-lg" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
+<% else %>
+  <%= form_for(:session) do |f|%>
+  	 <%= f.text_field :email, :placeholder => "email" %><br>
+  	 <%= f.password_field :password, :placeholder => "password" %>
+  	 <br>
+  	 <%= link_to raw('<button class="btn btn-lg btn-primary" role="button">Sign in</button>'), root_path, method: "post" %>
+<% end %>
 
-            <% else %>
-
-           <%= form_for(:session) do |f|%>
-           	 <%= f.label "email"%>
-           	 <%= f.text_field :email %>
-           	 <%= f.label "password" %>
-           	 <%= f.password_field :password %>
-           	 <br>
-           	 <%= link_to raw('<button class="btn btn-inverse btn-lg" role="button">Sign in</button>'), root_path, method: "post" %>
-            <% end %>
-
-<%= link_to "Create Account", signup_path, method: "get" %>
+<%= link_to "create account", signup_path, method: "get" %>
 <p><a href="#">forgot password?</a></p>
-            <% end %>
+
+<% end %>

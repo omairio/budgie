@@ -18,7 +18,7 @@ class TransactionsController < ApplicationController
     elsif (@spread_type == 4)
       @type = 365
     end
-    # @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
+    @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
     if (@transaction.save)
       redirect_to root_path
     else
