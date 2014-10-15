@@ -5,8 +5,8 @@ Budgie::Application.routes.draw do
   resources :transactions
   match '/', to: 'sessions#create', via: 'post'
   match '/', to: 'sessions#destroy', via: 'delete'
-  match '/about', to: 'static_pages#about', via: 'get'
-  match '/signup', to: 'users#new', via: 'get'
+  match '/about', to: 'static_pages#about', via: 'get' 
+  match '/signup', to: 'users#new', via: 'get' 
 
   match '/myaccount', to: 'users#edit', via: 'get'
   match '/myaccount', to: 'users#update', via: 'post'

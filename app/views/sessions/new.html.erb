@@ -16,7 +16,7 @@
            	 <%= f.label "password" %>
            	 <%= f.password_field :password %>
            	 <br>
-           	 <%= f.submit "sign in", class: "btn-inverse btn-large btn-primary" %>
+           	 <%= link_to raw('<button class="btn btn-inverse btn-lg" role="button">Sign in</button>'), root_path, method: "post" %>
             <% end %>
 
 <%= link_to "create account", signup_path, method: "get" %>
