@@ -33,6 +33,19 @@ class TransactionsController < ApplicationController
 
   def update
     @transaction = Transaction.find(params[:id])
+
+      @type = 1
+      if(@transaction.spread_type == "Day")
+        @type = 1
+      elsif (@transaction.spread_type == "Week")
+        @type = 7
+      elsif (@transaction.spread_type == "Month")
+        @type = 30
+      elsif (@transaction.spread_type == "Year")
+        @type = 365
+      end
+      @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
+
     if (@transaction.update_attributes(transaction_params))
       redirect_to root_path
     else
