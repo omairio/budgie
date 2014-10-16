@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Budgie</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <!-- javascript_include_tag "application", "data-turbolinks-track" => true -->
-  <%= csrf_meta_tags %>
+	<title>Budgie</title>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<!-- javascript_include_tag "application", "data-turbolinks-track" => true -->
+	<%= csrf_meta_tags %>
 </head>
 <body>
+<<<<<<< HEAD
 	<%= yield %>
+=======
+
+	<div class="container" id="main_well">
+		<div class="well">
+			<%= yield %>
+		</div>
+	</div>
+	<div class="well" style="background-color: #DDAAEE">
+		<%= params.inspect %>
+	</div>
+>>>>>>> 52deff8b0c91346fa3d2745417a5f30e07894772
 </body>
 </html>

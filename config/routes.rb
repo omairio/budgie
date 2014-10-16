@@ -18,6 +18,8 @@ Budgie::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/signout', to: 'sessions#destroy', via: 'get'
 
+  # get "static_pages/home"
+  # get "static_pages/about"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

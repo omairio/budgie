@@ -1,6 +1,7 @@
 <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
 
 <%= render 'shared/login_message' %>
+<<<<<<< HEAD
 <% if signed_in? %>
   <%= link_to "Sign Out", signout_path, method: "delete" %>
   <%= link_to raw('<button class="btn btn-danger btn-lg" role="button">Add Transaction</button>'), new_transaction_path, method: "get" %>
@@ -15,3 +16,44 @@
 <%= link_to "create account", signup_path, :class => "login-link", method: "get" %>
 <a href="#" class="login-link">forgot password?</a>
 <% end %>
+=======
+
+<% if signed_in? %>
+<% @transactions = current_user.transactions %>
+<%= link_to "Sign Out", signout_path, method: "delete" %>
+
+<% if @transactions.nil? %>
+<h2>NO TRANSACTIONS</h2>
+<% else %> 
+<% @transactions.each do |t| %>
+<div class="well">          
+  <p>Amount: <%= t.amount %></p>
+  <p>Per day: <%= t.per_day %></p>
+  <p>Date: <%= t.date %></p>
+  <p>Category: <%= t.category %></p>
+  <% if !t.description.nil? and !t.description.blank? %>
+  <p>Description: <%= t.description %></p>
+  <% end %>
+  <%= link_to raw('<button class="btn btn-danger btn-large" role="button">Delete</button>'), t, method: :get, confirm: "Are you sure?" %>
+  <%= link_to raw('<button class="btn btn-success btn-lg" role="button">Edit</button>'), edit_transaction_path(t) %>  
+</div>
+<% end %>
+<% end %>
+
+<%= link_to raw('<a class="btn btn-danger btn-large" role="button">Add Transaction</a>'), new_transaction_path, method: "get" %>
+<%= link_to raw('<button class="btn btn-inverse btn-lg" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
+<% else %>
+<%= form_for(:session) do |f|%>
+
+<%= f.text_field :email, :placeholder => "email" %>
+<%= f.password_field :password, :placeholder => "password" %>
+
+<%= link_to raw('<button class="btn btn-large btn-primary" role="button">Sign in</button>'), root_path, method: "post" %>
+
+<% end %>
+
+<%= link_to "create account", signup_path, method: "get" %>
+<p><a href="#">forgot password?</a></p>
+
+<% end %>
+>>>>>>> 52deff8b0c91346fa3d2745417a5f30e07894772
