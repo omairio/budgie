@@ -2,8 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+	text-align: center;
+	background-color: white;
+}
 
-#session-email {
-	width: 1000px;
-	padding: 1000px;
+a {
+	text-decoration: none;
+}
+
+.logo {
+	padding: 20px 0;
 }
