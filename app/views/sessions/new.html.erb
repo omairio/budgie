@@ -17,14 +17,14 @@
   <% else %> 
     <% @transactions.each do |t| %>    
       <p>Amount: <%= t.amount %></p>
-      <p>Per day: <%= t.per_day %></p>
+      <p>Per day: <%= t.per_day.round(2) %></p>
       <p>Date: <%= t.date %></p>
       <p>Category: <%= t.category %></p>
       <% if !t.description.nil? and !t.description.blank? %>
       <p>Description: <%= t.description %></p>
     <% end %>
     <%= link_to raw('<button class="btn btn-danger btn-large" role="button">Delete</button>'), t, method: :get, confirm: "Are you sure?" %>
-    <%= link_to raw('<button class="btn btn-success btn-lg" role="button">Edit</button>'), edit_transaction_path(t) %>  
+    <%= link_to raw('<button class="btn btn-success btn-large" role="button">Edit</button>'), edit_transaction_path(t) %>  
     </div>
   <% end %>
 <% end %>
@@ -33,7 +33,6 @@
     <%= link_to raw('<button class="btn btn-large" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
   </div>
 <div>
-
 
 <!--LOGIN PAGE-->
 <% else %>
