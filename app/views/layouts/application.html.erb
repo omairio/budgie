@@ -8,8 +8,10 @@
 </head>
 <body>
 	<%= yield %>
-	<div class="footer nav-bar-fixed-bottom" id="debug">
-		<%= params.inspect %>
+	<div id="footer">
+	  <div class="container" id="debug">
+	  	<%= params.inspect %>
+	  </div>
 	</div>
 </body>
 </html>
