@@ -18,21 +18,22 @@
   <% if !t.description.nil? and !t.description.blank? %>
   <p>Description: <%= t.description %></p>
   <% end %>
-  <%= link_to raw('<button class="btn btn-danger btn-lg" role="button">Delete</button>'), t, method: "delete" %>
+  <%= link_to raw('<button class="btn btn-danger btn-large" role="button">Delete</button>'), t, method: :get, confirm: "Are you sure?" %>
   <%= link_to raw('<button class="btn btn-success btn-lg" role="button">Edit</button>'), edit_transaction_path(t) %>  
 </div>
 <% end %>
 <% end %>
 
-
-<%= link_to raw('<button class="btn btn-danger btn-lg" role="button">Add Transaction</button>'), new_transaction_path, method: "get" %>
+<%= link_to raw('<a class="btn btn-danger btn-large" role="button">Add Transaction</a>'), new_transaction_path, method: "get" %>
 <%= link_to raw('<button class="btn btn-inverse btn-lg" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
 <% else %>
 <%= form_for(:session) do |f|%>
-<%= f.text_field :email, :placeholder => "email" %><br>
+
+<%= f.text_field :email, :placeholder => "email" %>
 <%= f.password_field :password, :placeholder => "password" %>
-<br>
-<%= link_to raw('<button class="btn btn-lg btn-primary" role="button">Sign in</button>'), root_path, method: "post" %>
+
+<%= link_to raw('<button class="btn btn-large btn-primary" role="button">Sign in</button>'), root_path, method: "post" %>
+
 <% end %>
 
 <%= link_to "create account", signup_path, method: "get" %>

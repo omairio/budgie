@@ -32,28 +32,47 @@ class TransactionsController < ApplicationController
   end
 
   def update
-  end
+    @transaction = Transaction.find(params[:id])
 
-  def destroy
-    if (signed_in?)
-      post = Post.find(params[:id])
-      if (current_user.id == post.user_id)
-        post.destroy
+      @type = 1
+      if(@transaction.spread_type == "Day")
+        @type = 1
+      elsif (@transaction.spread_type == "Week")
+        @type = 7
+      elsif (@transaction.spread_type == "Month")
+        @type = 30
+      elsif (@transaction.spread_type == "Year")
+        @type = 365
       end
-    end
-    render 'show'
-  end
+      @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
 
-  def edit
-    if (signed_in?)
-      post = Post.find(params[:id])
-      if (current_user.id == post.user_id)
-        post.destroy
-      end
+    if (@transaction.update_attributes(transaction_params))
+      redirect_to root_path
+    else
+      render 'edit'
     end
   end
 
   def show
+    destroy
+  end
+
+  def destroy
+    if (signed_in?)
+      transaction = Transaction.find(params[:id])
+      if (current_user.id == transaction.user_id)
+        transaction.destroy
+      end
+    end
+    redirect_to root_path
+  end
+
+  def edit
+    if (signed_in?)
+      @transaction = Transaction.find(params[:id])
+      if (current_user.id == @transaction.user_id)
+      end
+    end
   end
 
   private
