@@ -1,48 +1,46 @@
 <!--HOME-->
 <% if signed_in? %>
-  <!--Header-->
-  <div class="navbar navbar-default">
-    <div class="container">
-      <a class="navbar-brand" href="#">Project name</a>
-    </div>
-
-    <!--Login Greeting-->
     <div  id="login_status">
-    <%= render 'shared/login_message' %>
+      <%= render 'shared/login_message' %>
+    </div>
+  <!--Header-->
+  <div id="header" class="navbar navbar-default">
+    <!--Login Greeting-->
+    <div class="container">
+      <div class="float-left"><%= image_tag("logo_small.png", :alt => "budgie_logo") %></div>
+      <div class="float-right"><%= link_to raw('<button class="btn btn-primary btn-large" role="button">Sign Out</button>'), signout_path, method: "delete" %></div>
     </div>
   </div>
   <!-- Begin page content -->
   <div class="center-container">
     <div class="center-row">
 
-      <div class="col-xs-6">
+      <div class="col-xs-6" id="left">
         <!--LEFT SIDE-->
       </div>
       
       <div class="col-xs-6">
         <!--RIGHT SIDE-->
         <% @transactions = current_user.transactions %>
-        <div>
-         <%= link_to "Sign Out", signout_path, method: "delete" %>
-        </div>
         <!--Transactions-->
         <% if @transactions.nil? %>
-          <h2>NO TRANSACTIONS</h2>s
+          <h2>NO TRANSACTIONS</h2>
         <% else %> 
+          <h2>TRANSACTIONS</h2>
           <% @transactions.each do |t| %>    
-          <p>Amount: <%= t.amount %></p>
-          <p>Per day: <%= t.per_day %></p>
-          <p>Date: <%= t.date %></p>
-          <p>Category: <%= t.category %></p>
-          <% if !t.description.nil? and !t.description.blank? %>
-           <p>Description: <%= t.description %></p>
-          <% end %>
-          <%= link_to raw('<button class="btn btn-danger btn-large" role="button">Delete</button>'), t, method: :get, confirm: "Are you sure?" %>
-          <%= link_to raw('<button class="btn btn-success btn-lg" role="button">Edit</button>'), edit_transaction_path(t) %>  
+            <p>Amount: <%= t.amount %></p>
+            <p>Per day: <%= t.per_day %></p>
+            <p>Date: <%= t.date %></p>
+            <p>Category: <%= t.category %></p>
+            <% if !t.description.nil? and !t.description.blank? %>
+             <p>Description: <%= t.description %></p>
+            <% end %>
+            <%= link_to raw('<button class="btn btn-danger btn-large" role="button">Delete</button>'), t, method: :get, confirm: "Are you sure?" %>
+            <%= link_to raw('<button class="btn btn-success btn-large" role="button">Edit</button>'), edit_transaction_path(t) %>  
           <% end %>
         <% end %>
-        <div id="buttons">
-          <%= link_to raw('<a class="btn btn-large" role="button">Add Transaction</a>'), new_transaction_path, method: "get" %>
+        <div id="button">
+          <%= link_to raw('<button class="btn btn-large" role="button">Add Transaction</button>'), new_transaction_path, method: "get" %>
           <%= link_to raw('<button class="btn btn-large" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
         </div>
       </div>

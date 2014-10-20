@@ -43,7 +43,7 @@ body {
 }
 
 #footer > .container {
-  padding-top:5px
+  padding-top:5px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -65,5 +65,4 @@ body {
   height:100%;
   width:50%;
   display: table-cell;
-  border:1px solid #eee
 }
