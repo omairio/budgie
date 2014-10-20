@@ -19,29 +19,54 @@
         <!--LEFT SIDE-->
       </div>
       
-      <div class="col-xs-6">
+      <div class="col-xs-6" id="right">
+        <div class="btn-group-vertical float-left" id="icons">
+          <button type="button" class="btn btn-large btn-lg">
+            <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'), new_transaction_path, method: "get" %>
+          </button>
+          <button type="button" class="btn btn-large btn-lg">
+            <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), myaccount_path, method: "get" %>
+          </button>
+        </div>
         <!--RIGHT SIDE-->
         <% @transactions = current_user.transactions %>
         <!--Transactions-->
         <% if @transactions.nil? %>
           <h2>NO TRANSACTIONS</h2>
         <% else %> 
-          <h2>TRANSACTIONS</h2>
-          <% @transactions.each do |t| %>    
-            <p>Amount: <%= t.amount %></p>
-            <p>Per day: <%= t.per_day %></p>
-            <p>Date: <%= t.date %></p>
-            <p>Category: <%= t.category %></p>
-            <% if !t.description.nil? and !t.description.blank? %>
-             <p>Description: <%= t.description %></p>
+          <div class="recent">
+          <h2>Recent Transactions</h2>
+          <% @transactions.each do |t| %>   
+            <table class="zebra">  
+              <thead> 
+              <tr> 
+              <th><%= t.date %></th> 
+              <th>$<%= t.per_day %></th> 
+              </tr> 
+              </thead> 
+              <tbody> 
+              <tr> 
+              <td><h2><%= t.category %></h2>
+              <% if !t.description.nil? and !t.description.blank? %>
+                <%= t.description %>
+              <% end %></td> 
+              <td><h1 id="minus">$<%= t.amount %></h1></td> 
+              </tr> 
+              </tbody>
+                <div class="btn-group float-left" id="transaction">
+                  <button type="button" class="btn btn-default btn-lg">
+                    <%= link_to raw('<span class="glyphicon glyphicon-minus"></span>'), t, method: :get, confirm: "Are you sure?" %>
+                  <button type="button" class="btn btn-default btn-lg">
+                    <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), edit_transaction_path(t) %>
+                  </button>
+                </div>     
+              </table> 
             <% end %>
-            <%= link_to raw('<button class="btn btn-danger btn-large" role="button">Delete</button>'), t, method: :get, confirm: "Are you sure?" %>
-            <%= link_to raw('<button class="btn btn-success btn-large" role="button">Edit</button>'), edit_transaction_path(t) %>  
-          <% end %>
+          </div>   
         <% end %>
         <div id="button">
-          <%= link_to raw('<button class="btn btn-large" role="button">Add Transaction</button>'), new_transaction_path, method: "get" %>
-          <%= link_to raw('<button class="btn btn-large" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
+          
+          
         </div>
       </div>
     </div>
