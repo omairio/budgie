@@ -1,13 +1,21 @@
-<%= render 'shared/login_message' %>
+<!--Login Greeting-->
+<div  id="login_status">
+  <%= render 'shared/login_message' %>
+</div>
 
+<!--HOME-->
 <% if signed_in? %>
   <% @transactions = current_user.transactions %>
+  
+  <div>
   <%= link_to "Sign Out", signout_path, method: "delete" %>
+  </div>
+
+  <!--Transactions-->
   <% if @transactions.nil? %>
     <h2>NO TRANSACTIONS</h2>
   <% else %> 
-    <% @transactions.each do |t| %>
-    <div class="well">          
+    <% @transactions.each do |t| %>    
       <p>Amount: <%= t.amount %></p>
       <p>Per day: <%= t.per_day %></p>
       <p>Date: <%= t.date %></p>
@@ -20,10 +28,16 @@
     </div>
   <% end %>
 <% end %>
+  <div id="buttons">
+    <%= link_to raw('<a class="btn btn-large" role="button">Add Transaction</a>'), new_transaction_path, method: "get" %>
+    <%= link_to raw('<button class="btn btn-large" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
+  </div>
+<div>
 
-<%= link_to raw('<a class="btn btn-danger btn-large" role="button">Add Transaction</a>'), new_transaction_path, method: "get" %>
-<%= link_to raw('<button class="btn btn-inverse btn-lg" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
+
+<!--LOGIN PAGE-->
 <% else %>
+  <div id="login">
   <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
     <%= form_for(:session) do |f|%>
     <%= f.text_field :email, :placeholder => "email" %>
@@ -32,4 +46,5 @@
   <% end %>
   <%= link_to "create account", signup_path, method: "get" %>
   <p><a href="#">forgot password?</a></p>
+  </div>
 <% end %>
