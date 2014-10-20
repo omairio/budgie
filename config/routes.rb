@@ -11,7 +11,7 @@ Budgie::Application.routes.draw do
   match '/myaccount', to: 'users#edit', via: 'get'
   match '/myaccount', to: 'users#update', via: 'post'
 
-  match '/new_transaction', to: 'transactions#new', via: 'get'
+  match '/add_transaction', to: 'transactions#new', via: 'get'
   match '/edit_transaction', to: 'transactions#edit', via: 'get'
   match '/edit_transaction', to: 'transactions#destroy', via: 'delete'
 

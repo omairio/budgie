@@ -27,7 +27,7 @@
         </div>
         <!--Transactions-->
         <% if @transactions.nil? %>
-          <h2>NO TRANSACTIONS</h2>
+          <h2>NO TRANSACTIONS</h2>s
         <% else %> 
           <% @transactions.each do |t| %>    
           <p>Amount: <%= t.amount %></p>
