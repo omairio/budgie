@@ -1,13 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	<title>Budgie</title>
 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 	<!-- javascript_include_tag "application", "data-turbolinks-track" => true -->
 	<%= csrf_meta_tags %>
 </head>
 <body>
+	<% if signed_in? %>
+
+<div  id="login_status">
+      <%= render 'shared/login_message' %>
+    </div>
+  <!--Header-->
+  <div id="header" class="navbar navbar-default">
+    <!--Login Greeting-->
+    <div class="container">
+      <div class="float-left"><%= image_tag("logo_small.png", :alt => "budgie_logo") %></div>
+      <div class="float-right"><%= link_to raw('<button class="btn btn-primary btn-large" role="button">Sign Out</button>'), signout_path, method: "delete" %></div>
+    </div>
+  </div>
+  <!-- Begin page content -->
+  <div class="center-container">
+    <div class="center-row">
+      <div class="col-xs-6" id="left">
+        <!--LEFT SIDE-->
+        <p>You have spent</p>
+        <h1>59%</h1>
+        <p>of you previous month's expenditure</p>
+      </div>
+
+            <!--RIGHT SIDE-->
+      <div class="col-xs-6" id="right">
+        <div class="btn-group-vertical float-left" id="icons">
+          <button type="button" class="btn btn-large btn-lg">
+            <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'), new_transaction_path, method: "get" %>
+          </button>
+          <button type="button" class="btn btn-large btn-lg">
+            <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), myaccount_path, method: "get" %>
+          </button>
+        </div>
+
 	<%= yield %>
+	
+      </div>
+    </div>
+  </div>
+	<% else %>
+
+	<%= yield %>
+
+	<% end %>
 	<div id="footer">
 	  <div class="container" id="debug">
 	  	<%= params.inspect %>

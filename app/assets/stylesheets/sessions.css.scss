@@ -3,14 +3,66 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-	text-align: center;
 	background-color: white;
+}
+
+button {
+	margin-top: 10px;
 }
 
 a {
 	text-decoration: none;
 }
 
-.logo {
-	padding: 20px 0;
+.recent {
+	text-align: left;
+	min-width: 400px;
+	width: 90%;
+	margin: 20px 40px;
+}
+
+table td + td,
+table th + th
+{
+	text-align:right;
+	font-weight: normal;
+}
+
+.zebra {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+tbody {
+	color: black;
+	background-color: white;
+}
+
+thead {
+	color: white;
+	font-size: 16px;
+	font-weight: normal;
+	background-color: #15477b;
+	text-align: left;
+}
+
+td, th {
+	padding: 5px 10px;
+}
+
+tbody h1 { 
+	font-size: 36px;
+}
+
+tbody h2 {
+	color: #15477b;
+	font-size: 24px;
+}
+
+#minus {
+	color: #9e0b0f;
+}
+
+#plus {
+	color: #197b30;
 }
