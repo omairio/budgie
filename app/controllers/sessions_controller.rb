@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
             @error = "Password invalid"
          end
       end
+      @new_session = 'cool'
       render 'new'
    end
 
