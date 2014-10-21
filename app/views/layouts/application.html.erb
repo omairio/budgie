@@ -7,13 +7,8 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-
-	<div class="container" id="main_well">
-		<div class="well">
-			<%= yield %>
-		</div>
-	</div>
-	<div class="well" style="background-color: #DDAAEE">
+	<%= yield %>
+	<div class="footer nav-bar-fixed-bottom" id="debug">
 		<%= params.inspect %>
 	</div>
 </body>

@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
   def new
     @transaction = Transaction.new
+    # redirect_to root_path
   end
 
   def create

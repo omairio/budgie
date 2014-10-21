@@ -13,3 +13,5 @@
  *= require bootstrap-datepicker
  *= require flat-ui
  */
+
+ html, body{height:100%;}
