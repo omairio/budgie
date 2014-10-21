@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-	<title>Budgie</title>
-	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-	<!-- javascript_include_tag "application", "data-turbolinks-track" => true -->
-	<%= csrf_meta_tags %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <title>Budgie</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <!-- javascript_include_tag "application", "data-turbolinks-track" => true -->
+  <%= csrf_meta_tags %>
 </head>
 <body>
 	<% if signed_in? %>
-
-<div id="login_status">
-      <%= render 'shared/login_message' %>
-    </div>
+  <% @transactions = day_transaction() %>
+  <div id="login_status">
+    <%= render 'shared/login_message' %>
+  </div>
   <!--Header-->
   <div id="header" class="navbar navbar-default">
     <!--Login Greeting-->
     <div class="container">
       <div class="float-left">
-      <a href="/">
-      <%= image_tag("logo_small.png", :alt => "budgie_logo") %>
-      </a>
+        <a href="/">
+          <%= image_tag("logo_small.png", :alt => "budgie_logo") %>
+        </a>
       </div>
       <div class="float-right"><%= link_to raw('<button class="btn btn-primary btn-large" role="button">Sign Out</button>'), signout_path, method: "delete" %></div>
     </div>
@@ -34,36 +35,44 @@
         <% @total = get_total %>
         <h1><%= sprintf("%.2f", @total) %></h1>
         <p>Today</p>
+        <%= pie_chart @transactions.group(:category).count %>
+
+        <%= line_chart @transactions.map{|t|
+          {name: t.category, data: t.amount}
+        } %>
+
+        <%= line_chart @transactions.group_by_day(:created_at).count %>
+
       </div>
 
-            <!--RIGHT SIDE-->
+      <!--RIGHT SIDE-->
       <div class="col-xs-6" id="right">
         <div class="btn-group-vertical float-left" id="icons">
-            
-            <div>
+
+          <div>
             <%= link_to raw('<button type="button" class="btn btn-large btn-lg"><span class="glyphicon glyphicon-plus"></span></button>'), new_transaction_path, method: "get" %>
-            </div>
+          </div>
           
-            <div>
+          <div>
             <%= link_to raw('<button type="button" class="btn btn-large btn-lg"><span class="glyphicon glyphicon-cog"></span></button>'), myaccount_path, method: "get" %>
-            </div>
-        
+          </div>
+
         </div>
 
-	<%= yield %>
-	
+        <%= yield %>
+
       </div>
     </div>
   </div>
-	<% else %>
+  <% else %>
 
-	<%= yield %>
+  <%= yield %>
 
-	<% end %>
-	<div id="footer">
-	  <div class="container" id="debug">
-	  	<%= params.inspect %>
-	  </div>
-	</div>
+  <% end %>
+  <div id="footer">
+   <div class="container" id="debug">
+    <%= params.inspect %>
+  </div>
+</div>
 </body>
 </html>

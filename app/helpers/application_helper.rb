@@ -17,7 +17,6 @@ module ApplicationHelper
 
 	def get_total()
 		@total = 0
-		@transactions = day_transaction
 		@transactions.each do |t|
 			@total += t.amount
 		end
