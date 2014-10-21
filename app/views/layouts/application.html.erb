@@ -35,7 +35,6 @@
         <% @total = get_total %>
         <h1><%= sprintf("%.2f", @total) %></h1>
         <p>Today</p>
-        <%= pie_chart @transactions.group(:category).count %>
 
       </div>
 

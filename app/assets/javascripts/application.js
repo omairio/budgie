@@ -17,4 +17,18 @@
 //= require bootstrap-datepicker
 //= require jsapi
 //= require chartkick
+//= require highcharts
+//= require highcharts/highcharts-more # to get the new features in 2.3.0
+//= require highcharts/adapters/mootools-adapter
+//= require highcharts/adapters/prototype-adapter
+//= require highcharts/adapters/standalone-framework
+//= require highcharts/modules/annotations
+//= require highcharts/modules/canvas-tools
+//= require highcharts/modules/data
+//= require highcharts/modules/drilldown
+//= require highcharts/modules/exporting
+//= require highcharts/modules/funnel
+//= require highcharts/modules/heatmap
+//= require highcharts/modules/no-data-to-display
+//= require highcharts/themes/skies
 // require_tree .
