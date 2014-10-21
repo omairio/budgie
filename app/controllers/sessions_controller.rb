@@ -6,7 +6,9 @@ class SessionsController < ApplicationController
    def new
       if (signed_in?)
          @user = current_user
-         @transactions = day_transaction()
+         # @transactions = month_transaction()
+         @transactions = month_transaction(10)
+         @transactions = @transactions.paginate(page: params[:page], per_page: 5)
       end
    end
 

@@ -3,6 +3,18 @@ module ApplicationHelper
 		current_user.transactions.where(date: Date.parse(Date.today.strftime("%d-%m-%Y")))
 	end
 
+	def month_transaction(month)
+		current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
+	end
+
+	def year_transaction(year)
+		current_user.transactions.where("strftime('%Y', date) + 0 = ?", year)
+	end
+
+	def all_transactions()
+		current_user.transactions
+	end
+
 	def get_total()
 		@total = 0
 		@transactions = day_transaction
