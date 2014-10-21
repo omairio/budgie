@@ -13,8 +13,10 @@
 <div id="login_status">
       <%= render 'shared/login_message' %>
     </div>
+
   <!--Header-->
   <div id="header" class="navbar navbar-default">
+  
     <!--Login Greeting-->
     <div class="container">
       <div class="float-left">
@@ -25,21 +27,23 @@
       <div class="float-right"><%= link_to raw('<button class="btn btn-primary btn-large" role="button">Sign Out</button>'), signout_path, method: "delete" %></div>
     </div>
   </div>
+
   <!-- Begin page content -->
   <div class="center-container">
     <div class="center-row">
       <div class="col-xs-6 left">
+
         <!--LEFT SIDE-->
         <p>You have spent</p>
         <h1>59%</h1>
-        <p>of your previous month's expenditure</p>
+        <p>of your previous month's expenditure.</p>
         <p>You have saved</p>
         <% @total = get_total %>
         <h1><%= sprintf("%.2f", @total) %></h1>
-        <p>Today</p>
+        <p>today</p>
       </div>
 
-            <!--RIGHT SIDE-->
+        <!--RIGHT SIDE-->
       <div class="col-xs-6 right">
         <div class="btn-group-vertical float-left" id="icons">
             

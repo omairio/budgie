@@ -1,13 +1,27 @@
-<!--HOME-->
+<!-- HOME -->
 <% if signed_in? %>
 
 
-<!--Transactions-->
+<!-- Transactions -->
 <% if @transactions.nil? %>
 <h2>NO TRANSACTIONS</h2>
 <% else %> 
 <div class="recent">
   <h2>Recent Transactions</h2>
+
+
+<div class="col-xs-3">
+<p>View Transactions over:</p>
+  <select class="form-control select select-primary" data-toggle="select">
+    <option value="0">Day</option>
+    <option value="1">Week</option>
+    <option value="2">Month</option>
+    <option value="3">Year</option>
+    <option value="4" selected>All time</option>
+  </select>
+</div>
+
+
   <% @transactions.each do |t| %>   
   <table class="zebra">  
     <thead> 
@@ -46,7 +60,7 @@
 
     <!-- END RHS -->
 
-    <!--LOGIN PAGE-->
+    <!-- LOGIN PAGE -->
     <% else %>
     <div class="center-container" id="login">
       <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
