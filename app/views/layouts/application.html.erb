@@ -37,8 +37,6 @@
         <p>Today</p>
         <%= pie_chart @transactions.group(:category).count %>
 
-<%= line_chart @transactions.group(:category).group_by_week(:created_at).count %>
-
       </div>
 
       <!--RIGHT SIDE-->
