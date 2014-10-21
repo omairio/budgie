@@ -1,16 +1,12 @@
 class SessionsController < ApplicationController
    include SessionsHelper
-   include TransactionsHelper
+   include ApplicationHelper
 
    # Sign in page
    def new
       if (signed_in?)
          @user = current_user
          @transactions = day_transaction()
-         @total = 0
-         @transactions.each do |t|
-            @total += t.amount
-         end
       end
    end
 

@@ -27,6 +27,7 @@
       <div class="col-xs-6" id="left">
         <!--LEFT SIDE-->
         <p>You have saved</p>
+        <% @total = get_total %>
         <h1><%= sprintf("%.2f", @total) %></h1>
         <p>Today</p>
       </div>
