@@ -41,7 +41,7 @@
           {name: t.category, data: t.amount}
         } %>
 
-        <%= line_chart @transactions.group_by_day(:date).count %>
+        <%= line_chart @transactions.group(:date) %>
 
       </div>
 
