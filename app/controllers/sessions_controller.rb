@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
    def new
       if (signed_in?)
          @user = current_user
+         @transactions = current_user.transactions.where(date: Date.today.to_s)
       end
    end
 
