@@ -1,4 +1,4 @@
-<% if signed_in? %>
+<% if signed_in? and !@new_session.blank? %>
   <div id="success_explanation">
     <div class="alert alert-success">
     Sick login, <%= "#{current_user.first_name}" %>!

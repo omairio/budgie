@@ -1,50 +1,63 @@
-<!--Login Greeting-->
-<div  id="login_status">
-  <%= render 'shared/login_message' %>
-</div>
-
 <!--HOME-->
 <% if signed_in? %>
-  <% @transactions = current_user.transactions %>
-  
-  <div>
-  <%= link_to "Sign Out", signout_path, method: "delete" %>
-  </div>
 
-  <!--Transactions-->
-  <% if @transactions.nil? %>
-    <h2>NO TRANSACTIONS</h2>
-  <% else %> 
-    <% @transactions.each do |t| %>    
-      <p>Amount: <%= t.amount %></p>
-      <p>Per day: <%= t.per_day %></p>
-      <p>Date: <%= t.date %></p>
-      <p>Category: <%= t.category %></p>
-      <% if !t.description.nil? and !t.description.blank? %>
-      <p>Description: <%= t.description %></p>
+
+<!--Transactions-->
+<% if @transactions.nil? %>
+<h2>NO TRANSACTIONS</h2>
+<% else %> 
+<div class="recent">
+  <h2>Recent Transactions</h2>
+  <% @transactions.each do |t| %>   
+  <table class="zebra">  
+    <thead> 
+      <tr> 
+        <th><%= t.date %></th> 
+        <th>$<%= sprintf("%.2f", t.per_day) %> per day</th> 
+      </tr> 
+    </thead> 
+    <tbody> 
+      <tr> 
+        <td><h2><%= t.category %></h2>
+          <% if !t.description.nil? and !t.description.blank? %>
+          <%= t.description %>
+          <% end %></td> 
+          <td>
+          <% if t.amount < 0 %>
+          <h1 id="minus">-
+          <% else %>
+          <h1 id="plus">
+          <% end %>
+          $<%= sprintf("%.2f", t.amount) %></h1>
+          </td> 
+        </tr> 
+      </tbody>
+      <div class="btn-group float-left" id="transaction">
+        <button type="button" class="btn btn-default btn-lg">
+          <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), t, method: :get, confirm: "Are you sure?" %>
+          <button type="button" class="btn btn-default btn-lg">
+            <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'), edit_transaction_path(t) %>
+          </button>
+        </div>     
+      </table> 
+      <% end %>
+    </div>   
     <% end %>
-    <%= link_to raw('<button class="btn btn-danger btn-large" role="button">Delete</button>'), t, method: :get, confirm: "Are you sure?" %>
-    <%= link_to raw('<button class="btn btn-success btn-lg" role="button">Edit</button>'), edit_transaction_path(t) %>  
+
+    <!-- END RHS -->
+
+    <!--LOGIN PAGE-->
+    <% else %>
+    <div class="center-container" id="login">
+      <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
+      <%= form_for(:session) do |f|%>
+      <%= f.text_field :email, :placeholder => "email" %>
+      <%= f.password_field :password, :placeholder => "password" %>
+      <%= link_to raw('<button class="btn btn-large btn-primary" role="button">Sign in</button>'), root_path, method: "post" %>
+      <% end %>
+      <%= link_to "create account", signup_path, method: "get" %>
+      <p><a href="#">forgot password?</a></p>
     </div>
-  <% end %>
-<% end %>
-  <div id="buttons">
-    <%= link_to raw('<button class="btn btn-large" role="button">Add Transaction</button>'), add_transaction_path, method: "get" %>
-    <%= link_to raw('<button class="btn btn-large" role="button">Change Account Details</button>'), myaccount_path, method: "get" %>
-  </div>
-<div>
+    <% end %>
 
 
-<!--LOGIN PAGE-->
-<% else %>
-  <div id="login">
-  <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
-    <%= form_for(:session) do |f|%>
-    <%= f.text_field :email, :placeholder => "email" %>
-    <%= f.password_field :password, :placeholder => "password" %>
-    <%= link_to raw('<button class="btn btn-large btn-primary" role="button">Sign in</button>'), root_path, method: "post" %>
-  <% end %>
-  <%= link_to "create account", signup_path, method: "get" %>
-  <p><a href="#">forgot password?</a></p>
-  </div>
-<% end %>

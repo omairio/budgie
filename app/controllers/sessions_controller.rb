@@ -1,10 +1,12 @@
 class SessionsController < ApplicationController
    include SessionsHelper
+   include ApplicationHelper
 
    # Sign in page
    def new
       if (signed_in?)
          @user = current_user
+         @transactions = day_transaction()
       end
    end
 
@@ -21,6 +23,7 @@ class SessionsController < ApplicationController
             @error = "Password invalid"
          end
       end
+      @new_session = 'cool'
       render 'new'
    end
 
