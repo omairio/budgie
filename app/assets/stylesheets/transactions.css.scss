@@ -1,3 +1,39 @@
-// Place all the styles related to the Transactions controller here.
+/* Place all the styles related to the Transactions controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// You can use Sass (SCSS) here: http://sass-lang.com
+*/
+
+#info {
+	text-align: center;
+	background-color:white;
+	padding: 80px 0px;
+
+	h1 {
+		display: block;
+		margin: auto;
+		text-align: center;
+	}
+
+	input {
+		display: block;
+		margin: 0 auto;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		padding: 18px 10px;
+		font-size: 18px;
+		width: 30%;
+		min-width: 200px;
+		max-width: 300px;
+		border-radius: 6px;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	#sign_in_button{
+		display: block;
+		margin: auto;
+		text-decoration: none;
+	}
+}

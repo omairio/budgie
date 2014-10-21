@@ -4,11 +4,9 @@
 @import "flat-ui";
 
 #login {
-	margin-left:-20px;
- 	margin-right:-20px;
 	text-align: center;
 	background-color:#1e7394;
-	padding: 20px 0px;
+	padding: 80px 0px;
 
 	h1 {
 		display: block;
@@ -21,8 +19,11 @@
 		margin: 0 auto;
 		margin-top: 20px;
 		margin-bottom: 20px;
-		padding: 10px;
+		padding: 18px 10px;
 		font-size: 18px;
+		width: 30%;
+		min-width: 200px;
+		max-width: 300px;
 	}
 
 	a {
@@ -36,22 +37,71 @@
 	}
 }
 
-#login_status {
-	margin-left:-20px;
- 	margin-right:-20px;
-}
-
-#debug {
-	background-color: #d7d7d7;
-	padding: 10px 0;
-	margin-left:-20px;
- 	margin-right:-20px;
-}
-
-#buttons {
+#button {
 	padding: 10px;
 }
 
-#session-email {
-	text-align: center;
+#header {
+	padding: 10px;
+	margin: 0;
+	background-color:#1e7394;
+    border-bottom: solid #34495e 1px;
+
 }
+
+#icons {
+	margin-left: -55px;
+
+	a {
+		color: white;
+	}
+}
+
+.btn-group > .btn {
+	background: #15477b;
+
+	a {
+		color: white;
+	}
+}
+
+.btn-group > .btn:first-child {
+	margin-left: 0;
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-radius-topleft: 4px;
+	border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.btn-group > .btn:last-child, .btn-group > .dropdown-toggle {
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-right-radius: 4px;
+	-webkit-border-bottom-right-radius: 0px;
+	-moz-border-radius-bottomright: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+#left {
+	background: url('info_background.jpg');
+	background-position: center;
+}
+
+#right {
+	background: #464646; /* Old browsers */
+	background: -moz-linear-gradient(left,  #464646 0%, #e1e1e1 2%, #e1e1e1 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#464646), color-stop(2%,#e1e1e1), color-stop(100%,#e1e1e1)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #464646 0%,#e1e1e1 2%,#e1e1e1 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #464646 0%,#e1e1e1 2%,#e1e1e1 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #464646 0%,#e1e1e1 2%,#e1e1e1 100%); /* IE10+ */
+	background: linear-gradient(to right,  #464646 0%,#e1e1e1 2%,#e1e1e1 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#464646', endColorstr='#e1e1e1',GradientType=1 ); /* IE6-9 */
+}
+
+.alert-success{
+	margin: 0;
+	border-radius: 0;
+}
+
