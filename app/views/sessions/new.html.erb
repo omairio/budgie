@@ -10,17 +10,29 @@
   <h2>Recent Transactions</h2>
 
 
-<div class="col-xs-3">
-<p>View Transactions over:</p>
-  <select class="form-control select select-primary" data-toggle="select">
-    <option value="0">Day</option>
-    <option value="1">Week</option>
-    <option value="2">Month</option>
-    <option value="3">Year</option>
-    <option value="4" selected>All time</option>
-  </select>
-</div>
+<script>
+$(document).ready(function(){
+$('#select').change(function() {
+     $('#viewDay, #viewWeek, #viewMonth, #viewYear, #viewAll').hide();
+     $('#view' + $(this).find('option:selected').attr('id')).show();
+  });
+});
+</script>
 
+<p>View transactions by:</p>
+<select id="select" class="form-control select select-primary" data-toggle="select">
+  <option id="Day" value="Day">Day</option>
+  <option id="Week" value="Week">Week</option>
+  <option id="Month" value="Month">Month</option>
+  <option id="Year" value="Year">Year</option>
+  <option id="All" value="All" selected>All</option>
+</select>
+
+<div id="viewDay">view by day</div>
+<div id="viewWeek">view by week</div>
+<div id="viewMonth">view by month</div>
+<div id="viewYear">view by year</div>
+<div id="viewAll">view all</div>
 
   <% @transactions.each do |t| %>   
   <table class="zebra">  

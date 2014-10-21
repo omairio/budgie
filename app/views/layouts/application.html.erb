@@ -2,9 +2,10 @@
 <html>
 <head>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<title>Budgie</title>
 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-	<!-- javascript_include_tag "application", "data-turbolinks-track" => true -->
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
 </head>
 <body>
@@ -16,7 +17,7 @@
 
   <!--Header-->
   <div id="header" class="navbar navbar-default">
-  
+
     <!--Login Greeting-->
     <div class="container">
       <div class="float-left">

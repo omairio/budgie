@@ -2,7 +2,7 @@
 
 	<% provide(:title, 'Account Info') %>
 
-	<h1>Budgie</h1>
+	<h1>Update Account Info</h1>
 
 	<%= form_for(@user) do |f| %>
 	<%= render 'shared/error_messages' %>
@@ -17,8 +17,12 @@
 
 	<%= f.password_field :password_confirmation, placeholder: "enter password again"%>
 
-	<%= f.submit "Update Account Info", class: "btn btn-large btn-primary" %>
+	<%= f.submit "Update", class: "btn btn-large btn-primary" %>
 
 	<% end %>
+
+	<div id="buttons">
+	    <%= link_to raw('<button class="btn btn-medium" role="button">Cancel</button>'), root_path, method: "get" %>
+	</div>
 
 </div>
