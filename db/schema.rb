@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015042502) do
+ActiveRecord::Schema.define(version: 20141021060329) do
 
   create_table "transactions", force: true do |t|
     t.float    "amount"
     t.integer  "user_id"
     t.string   "category"
-    t.datetime "date"
+    t.date     "date"
     t.integer  "day_spread"
     t.float    "per_day"
     t.string   "description"

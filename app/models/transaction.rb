@@ -8,32 +8,31 @@ class Transaction < ActiveRecord::Base
 	default_scope -> { order('created_at DESC') }
 
 	validates(:amount, {
-				presence: true,
-				numericality: {only_float: true}
-	})
+		presence: true,
+		numericality: {only_float: true}
+		})
 	validates(:user_id, {
-				presence: true,
-	})
+		presence: true,
+		})
 
 	validates(:date, {
-				presence: true,
-	})
+		presence: true,
+		})
 
 	# Day spread has a max value of the number of days in a year
 	validates(:day_spread, {
-				presence: true,
-				numericality: {greater_than: 0, less_than: 365}
-	})
+		presence: true,
+		numericality: {greater_than: 0, less_than: 365}
+		})
 
 	validates(:per_day, {
-				presence: true,
-	})
+		presence: true,
+		})
 	validates(:category, {
-				presence: true,
-				length: { maximum: 50 }
-	})
+		presence: true,
+		length: { maximum: 50 }
+		})
 	validates(:description, {
-				length: { maximum: 100 }
-	})
-
+		length: { maximum: 100 }
+		})
 end
