@@ -1,19 +1,24 @@
-<% provide(:title, 'Account Info') %>
-<h1>Budgie</h1>
+<div class="center-container right" id="info">
 
-<%= form_for(@user) do |f| %>
-<%= render 'shared/error_messages' %>
+	<% provide(:title, 'Account Info') %>
 
-<%= f.text_field :first_name, placeholder: "first name" %>
+	<h1>Budgie</h1>
 
-<%= f.text_field :last_name, placeholder: "last name" %>
+	<%= form_for(@user) do |f| %>
+	<%= render 'shared/error_messages' %>
 
-<%= f.text_field :email, placeholder: "email address: example@example.com" %>
+	<%= f.text_field :first_name, placeholder: "first name" %>
 
-<%= f.password_field :password, placeholder: "password" %>
+	<%= f.text_field :last_name, placeholder: "last name" %>
 
-<%= f.password_field :password_confirmation, placeholder: "enter password again"%>
+	<%= f.text_field :email, placeholder: "email address: example@example.com" %>
 
-<%= f.submit "Update Account Info", class: "btn btn-large btn-primary" %>
+	<%= f.password_field :password, placeholder: "password" %>
 
-<% end %>
+	<%= f.password_field :password_confirmation, placeholder: "enter password again"%>
+
+	<%= f.submit "Update Account Info", class: "btn btn-large btn-primary" %>
+
+	<% end %>
+
+</div>

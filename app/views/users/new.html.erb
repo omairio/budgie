@@ -1,25 +1,29 @@
-<% provide(:title, 'Sign up') %>
+<div class="center-container blue-bg" id="info">
 
-<h1>Sign up</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+	<% provide(:title, 'Sign up') %>
 
-<%= form_for(@user) do |f| %>
-<%= render 'shared/error_messages' %>
+	<h1>Sign up</h1>
+	<p>Find me in app/views/users/new.html.erb</p>
 
-<%= f.text_field :first_name, placeholder: "first name" %><br>
+	<%= form_for(@user) do |f| %>
+	<%= render 'shared/error_messages' %>
 
-<%= f.text_field :last_name, placeholder: "last name" %><br>
+	<%= f.text_field :first_name, placeholder: "first name" %>
 
-<%= f.text_field :email, placeholder: "email address: example@example.com" %><br>
+	<%= f.text_field :last_name, placeholder: "last name" %>
 
-<%= f.password_field :password, placeholder: "password" %><br>
+	<%= f.text_field :email, placeholder: "email address: example@example.com" %>
 
-<%= f.password_field :password_confirmation, placeholder: "enter password again"%><br>
+	<%= f.password_field :password, placeholder: "password" %>
 
-<%= f.submit "Create my account", class: "btn btn-large btn-primary" %><br>
+	<%= f.password_field :password_confirmation, placeholder: "enter password again"%>
 
-<% end %>
+	<%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+
+	<% end %>
 
 <div id="buttons">
     <%= link_to raw('<button class="btn btn-large" role="button">Back</button>'), root_path, method: "get" %>
+</div>
+
 </div>
