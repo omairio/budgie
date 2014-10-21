@@ -1,7 +1,7 @@
 <!--HOME-->
 <% if signed_in? %>
 
-<% @transactions = current_user.transactions.where(date: Date.parse(Date.today.strftime("%d-%m-%Y"))) %>
+
 <!--Transactions-->
 <% if @transactions.nil? %>
 <h2>NO TRANSACTIONS</h2>
@@ -13,7 +13,7 @@
     <thead> 
       <tr> 
         <th><%= t.date %></th> 
-        <th>$<%= t.per_day %></th> 
+        <th>$<%= sprintf("%.2f", t.per_day) %> per day</th> 
       </tr> 
     </thead> 
     <tbody> 
@@ -28,7 +28,7 @@
           <% else %>
           <h1 id="plus">
           <% end %>
-          $<%= t.amount.round(2) %></h1>
+          $<%= sprintf("%.2f", t.amount) %></h1>
           </td> 
         </tr> 
       </tbody>
