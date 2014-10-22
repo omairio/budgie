@@ -10,7 +10,6 @@
   <h2>Recent Transactions</h2>
 
 
-<<<<<<< HEAD
 <script>
 $(document).ready(function(){
 $('#select').change(function() {
@@ -34,31 +33,7 @@ $('#select').change(function() {
 <div id="viewMonth">view by month</div>
 <div id="viewYear">view by year</div>
 <div id="viewAll">view all</div>
-=======
-  <script>
-    $(document).ready(function(){
-      $('#select').change(function() {
-       $('#viewDay, #viewWeek, #viewMonth, #viewYear, #viewAll').hide();
-       $('#view' + $(this).find('option:selected').attr('id')).show();
-     });
-    });
-  </script>
 
-  <p>View transactions by:</p>
-  <select id="select" class="form-control select select-primary" data-toggle="select">
-    <option id="Day" value="Day">Day</option>
-    <option id="Week" value="Week">Week</option>
-    <option id="Month" value="Month">Month</option>
-    <option id="Year" value="Year">Year</option>
-    <option id="All" value="All" selected>All</option>
-  </select>
-
-  <div id="viewDay">view by day</div>
-  <div id="viewWeek">view by week</div>
-  <div id="viewMonth">view by month</div>
-  <div id="viewYear">view by year</div>
-  <div id="viewAll">view all</div>
->>>>>>> master
 
   <% @transactions.each do |t| %>   
   <table class="zebra">  
@@ -99,26 +74,7 @@ $('#select').change(function() {
       </div>   
       
       <% end %>
-<<<<<<< HEAD
-    </div>   
-    <% end %>
 
-    <!-- END RHS -->
-
-    <!-- LOGIN PAGE -->
-    <% else %>
-    <div class="center-container" id="login">
-      <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
-      <%= form_for(:session) do |f|%>
-      <%= f.text_field :email, :placeholder => "email" %>
-      <%= f.password_field :password, :placeholder => "password" %>
-      <%= link_to raw('<button class="btn btn-large btn-primary" role="button">Sign in</button>'), root_path, method: "post" %>
-      <% end %>
-      <%= link_to "create account", signup_path, method: "get" %>
-      <p><a href="#">forgot password?</a></p>
-    </div>
-<% end %>
-=======
 
       <!-- END RHS -->
 
@@ -136,6 +92,6 @@ $('#select').change(function() {
         <p><a href="#">forgot password?</a></p>
       </div>
       <% end %>
->>>>>>> master
+
 
 
