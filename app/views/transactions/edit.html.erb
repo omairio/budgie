@@ -14,20 +14,16 @@
 	  <span class="add-on"><i class="icon-th"></i></span>
 	</div>
 
-	<br>
 	 <%= f.text_field :day_spread, placeholder: "day spread" %>
 
 	<span class="select2-container form-control select select-primary">
-	<select id="transaction_spread_type" name="transaction[spread_type]">
-	<option value="Day">Day</option>
-	<option value="Week">Week</option>
-	<option value="Month">Month</option>
-	<option value="Year">Year</option>
-	</select>
+		<select id="transaction_spread_type" name="transaction[spread_type]">
+			<option value="Day">Day</option>
+			<option value="Week">Week</option>
+			<option value="Month">Month</option>
+			<option value="Year">Year</option>
+		</select>
 	</span>
-	<br>
-
-	<br>
 
 	<%= render 'shared/category_select' %>
 
