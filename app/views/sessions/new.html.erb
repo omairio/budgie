@@ -34,6 +34,10 @@ $('#select').change(function() {
 <div id="viewYear">view by year</div>
 <div id="viewAll">view all</div>
 
+<div id="startDate">
+  <p>Starting from:</p>
+  <input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= Date.today.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
+</div>
 
   <% @transactions.each do |t| %>   
   <table class="zebra">  
