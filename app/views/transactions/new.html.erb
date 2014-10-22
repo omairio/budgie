@@ -4,6 +4,7 @@
 
 	<h1>New Transaction</h1>
 
+
 	<%= form_for(@transaction) do |f| %>
 	<%= render 'shared/error_messages' %>
 	<%= f.text_field :amount, placeholder: "amount" %>
@@ -36,6 +37,32 @@
 	<div id="buttons">
 	    <%= link_to raw('<button class="btn btn-medium" role="button">Cancel</button>'), root_path, method: "get" %>
 	</div>
+
+<br>
+ <%= f.text_field :day_spread, placeholder: "day spread" %>
+ 
+<span class="select2-container form-control select select-primary">
+<select id="transaction_spread_type" name="transaction[spread_type]">
+<option value="Day">Day</option>
+<option value="Week">Week</option>
+<option value="Month">Month</option>
+<option value="Year">Year</option>
+</select>
+</span>
+<br>
+
+<%= render 'shared/category_select' %>
+<br>
+
+<%= f.text_field :description, placeholder: "description" %>
+
+<%= f.submit "Enter Transaction", class: "btn btn-large btn-primary" %>
+
+<% end %>
+
+<div id="buttons">
+    <%= link_to raw('<button class="btn btn-medium" role="button">Cancel</button>'), root_path, method: "get" %>
+</div>
 
 </div>
 
