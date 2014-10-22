@@ -17,6 +17,7 @@ gem 'chartkick', '~> 1.2.4'
 gem 'groupdate', '~> 2.1.1'
 gem 'active_median', '~> 0.1.0'
 gem "highcharts-rails", "~> 3.0.0"
+gem 'lazy_high_charts'
 # Could not find minitest-4.7.5.gem for installation
 
 gem 'minitest', '~> 4.7.5'
