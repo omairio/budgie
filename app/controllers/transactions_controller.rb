@@ -7,41 +7,56 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.new(transaction_params)
-    @transaction.user_id = current_user.id
+    transaction = Transaction.new(transaction_params)
+    transaction.user_id = current_user.id
 
     # Spread amount over a few days
-    @type = 1
-    if (!@transaction.day_spread.nil?)
-      if(@transaction.spread_type == "Day")
-        @type = 1
-      elsif (@transaction.spread_type == "Week")
-        @type = 7
-      elsif (@transaction.spread_type == "Month")
-        @type = 30
-      elsif (@transaction.spread_type == "Year")
-        @type = 365
-      end
-      @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
-    end
-
-    @cat = @transaction.category
-
-    if (@cat == "Personal Income" or @cat == "Investment Income")
-      if (@transaction.amount < 0)
-        @transaction.amount *= -1
-      end
-    elsif (@cat != "Other")
-      if (@transaction.amount > 0)
-        @transaction.amount *= -1
+    type = 1
+    if (!transaction.day_spread.nil?)
+      if(transaction.spread_type == "Day")
+        type = 1
+      elsif (transaction.spread_type == "Week")
+        type = 7
+      elsif (transaction.spread_type == "Month")
+        type = 30
+      elsif (transaction.spread_type == "Year")
+        type = 365
       end
     end
-    
-    if (@transaction.save)
-      redirect_to root_path
-    else
+
+    day_amount = transaction.day_spread * type
+    transaction.amount = transaction.amount/(day_amount)
+
+    cat = transaction.category
+
+    if (cat == "Personal Income" or cat == "Investment Income")
+      if (transaction.amount < 0)
+        transaction.amount *= -1
+      end
+    elsif (cat != "Other")
+      if (transaction.amount > 0)
+        transaction.amount *= -1
+      end
+    end
+
+    if (!transaction.save)
       render 'new'
+      return
+    end    
+
+    i = 1
+    while i < (day_amount) do 
+      transaction_new = Transaction.new(transaction_params)
+      transaction_new.user_id = current_user.id
+      transaction_new.amount = transaction.amount
+      transaction_new.date = transaction.date + 1.days
+      transaction = transaction_new
+      @yes = transaction.save
+      i += 1
     end
+
+    redirect_to root_path
+    return
   end
 
   def update

@@ -10,6 +10,8 @@
   <h2>Recent Transactions</h2>
 
 
+  <div id="container" style="width:100%;height:400px;"></div>
+
   <script>
     $(document).ready(function(){
       $('#select').change(function() {
@@ -18,6 +20,8 @@
      });
     });
   </script>
+
+
 
   <p>View transactions by:</p>
   <select id="select" class="form-control select select-primary" data-toggle="select">
@@ -33,13 +37,13 @@
   <div id="viewMonth">view by month</div>
   <div id="viewYear">view by year</div>
   <div id="viewAll">view all</div>
-
+  <% @transactions = @transactions.paginate(page: params[:page], per_page: 5) %>
   <% @transactions.each do |t| %>   
   <table class="zebra">  
     <thead> 
       <tr> 
         <th><%= t.date %></th> 
-        <th>$<%= sprintf("%.2f", t.per_day) %> per day</th> 
+        <th></th> 
       </tr> 
     </thead> 
     <tbody> 
@@ -52,7 +56,7 @@
             <% temp = t.amount %>
             <% if temp < 0 %>
             <h1 id="minus">-
-            <% temp *= -1 %>
+              <% temp *= -1 %>
               <% else %>
               <h1 id="plus">
                 <% end %>
@@ -70,7 +74,7 @@
           </div>     
         </table> 
         <% end %>
-        <% @transactions = @transactions.paginate(page: params[:page], per_page: 5) %>
+
         <%= will_paginate @transactions %>
       </div>   
       

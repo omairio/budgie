@@ -25,9 +25,9 @@ class Transaction < ActiveRecord::Base
 		numericality: {greater_than: 0, less_than: 365}
 		})
 
-	validates(:per_day, {
-		presence: true,
-		})
+	# validates(:per_day, {
+	# 	presence: true,
+	# 	})
 	validates(:category, {
 		presence: true,
 		length: { maximum: 50 }
