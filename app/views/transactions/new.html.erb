@@ -1,9 +1,8 @@
-<div class="center-container" id="info">
+<div class="center-container right" id="info">
 
 <% provide(:title, 'Add Transaction') %>
 
-<h1>Transactions#new</h1>
-<p>Find me in app/views/transactions/new.html.erb</p>
+<h1>New Transaction</h1>
 
 <%= form_for(@transaction) do |f| %>
 <%= render 'shared/error_messages' %>
@@ -27,21 +26,7 @@
 </span>
 <br>
 
-<span class="select2-container form-control select select-primary">
-<select id="transaction_category" name="transaction[category]">
-<option selected disabled="category">category</option>
-<option value="Food+Drink">Food &amp; Drink</option>
-<option value="Alcohol+Tabacco">Alcohol &amp; Tobacco</option>
-<option value="Clothing+Footwear">Clothing &amp; Footwear</option>
-<option value="Electricity+Gas+Water">Electricity, Gas &amp; Water</option>
-<option value="Transport">Transport</option>
-<option value="Communication">Communication</option>
-<option value="Health">Health</option>
-<option value="Recreation">Recreation</option>
-<option value="Education">Education</option>
-<option value="Other">Other</option>
-</select>
-</span>
+<%= render 'shared/category_select' %>
 <br>
 
 <%= f.text_field :description, placeholder: "description" %>
@@ -49,5 +34,10 @@
 <%= f.submit "Enter Transaction", class: "btn btn-large btn-primary" %>
 
 <% end %>
+
+<div id="buttons">
+    <%= link_to raw('<button class="btn btn-medium" role="button">Cancel</button>'), root_path, method: "get" %>
+</div>
+
 </div>
 

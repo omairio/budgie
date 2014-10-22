@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
    def new
       if (signed_in?)
          @user = current_user
-         @transactions = day_transaction()
+         # @transactions = month_transaction(10)
+         # @transactions = day_transaction()
       end
    end
 
