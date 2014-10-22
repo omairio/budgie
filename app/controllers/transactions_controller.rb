@@ -25,6 +25,18 @@ class TransactionsController < ApplicationController
       @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
     end
 
+    @cat = @transaction.category
+
+    if (@cat == "Personal Income" or @cat == "Investment Income")
+      if (@transaction.amount < 0)
+        @transaction.amount *= -1
+      end
+    elsif (@cat != "Other")
+      if (@transaction.amount > 0)
+        @transaction.amount *= -1
+      end
+    end
+    
     if (@transaction.save)
       redirect_to root_path
     else
@@ -35,17 +47,30 @@ class TransactionsController < ApplicationController
   def update
     @transaction = Transaction.find(params[:id])
 
+    @type = 1
+    if(@transaction.spread_type == "Day")
       @type = 1
-      if(@transaction.spread_type == "Day")
-        @type = 1
-      elsif (@transaction.spread_type == "Week")
-        @type = 7
-      elsif (@transaction.spread_type == "Month")
-        @type = 30
-      elsif (@transaction.spread_type == "Year")
-        @type = 365
+    elsif (@transaction.spread_type == "Week")
+      @type = 7
+    elsif (@transaction.spread_type == "Month")
+      @type = 30
+    elsif (@transaction.spread_type == "Year")
+      @type = 365
+    end
+
+    @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
+
+    @cat = @transaction.category
+
+    if (@cat == "Personal Income" or @cat == "Investment Income")
+      if (@transaction.amount < 0)
+        @transaction.amount *= -1
       end
-      @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
+    elsif (@cat != "Other")
+      if (@transaction.amount > 0)
+        @transaction.amount *= -1
+      end
+    end
 
     if (@transaction.update_attributes(transaction_params))
       redirect_to root_path
