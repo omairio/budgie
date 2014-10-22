@@ -9,15 +9,9 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
-<<<<<<< HEAD
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
   <%= csrf_meta_tags %>
-=======
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <%= csrf_meta_tags %>
-
->>>>>>> 653a6f8de57c52763cb92fe337100c0104b08df5
 </head>
 
 <body>
@@ -26,20 +20,6 @@
   <div id="login_status">
     <%= render 'shared/login_message' %>
   </div>
-<<<<<<< HEAD
-
-  <!--Header-->
-  <div id="header" class="navbar navbar-default">
-
-    <!--Login Greeting-->
-    <div class="container">
-      <div class="float-left">
-        <a href="/">
-          <%= image_tag("logo_small.png", :alt => "budgie_logo") %>
-        </a>
-      </div>
-      <div class="float-right"><%= link_to raw('<button class="btn btn-primary btn-large" role="button">Sign Out</button>'), signout_path, method: "delete" %></div>
-=======
   
 <!--Header-->
 <div id="header" class="navbar navbar-default">
@@ -51,7 +31,6 @@
     </div>
     <div class="float-right"><%= link_to raw('<button class="btn btn-primary btn-large" role="button">Sign Out</button>'), signout_path, method: "delete" %></div>
 
->>>>>>> 653a6f8de57c52763cb92fe337100c0104b08df5
     </div>
   </div>
 
@@ -61,8 +40,6 @@
       
 
         <!--LEFT SIDE-->
-<<<<<<< HEAD
-=======
 
         <% @total = get_total %>
 
@@ -79,18 +56,13 @@
           <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>');">
         <% end %>
 
->>>>>>> 653a6f8de57c52763cb92fe337100c0104b08df5
        <!--  <p>You have spent</p>
         <h1>59%</h1>
         <p>of your previous month's expenditure.</p> -->
         <p>You have saved</p>
         <h1><%= sprintf("%.2f", @total) %></h1>
-<<<<<<< HEAD
-        <p>Today</p>
-=======
 
         <p>today</p>
->>>>>>> 653a6f8de57c52763cb92fe337100c0104b08df5
 
       </div>
 
