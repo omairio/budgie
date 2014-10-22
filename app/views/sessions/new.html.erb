@@ -49,12 +49,14 @@
           <%= t.description %>
           <% end %></td> 
           <td>
-            <% if t.amount < 0 %>
+            <% temp = t.amount %>
+            <% if temp < 0 %>
             <h1 id="minus">-
+            <% temp *= -1 %>
               <% else %>
               <h1 id="plus">
                 <% end %>
-                $<%= sprintf("%.2f", t.amount) %></h1>
+                $<%= sprintf("%.2f", temp) %></h1>
               </td> 
             </tr> 
           </tbody>
