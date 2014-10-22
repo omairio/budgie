@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       if (signed_in?)
          @user = current_user
          # @transactions = month_transaction(10)
-         @transactions = day_transaction()
+         # @transactions = day_transaction()
       end
    end
 

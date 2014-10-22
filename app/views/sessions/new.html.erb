@@ -71,12 +71,13 @@ $('#select').change(function() {
         <% @transactions = @transactions.paginate(page: params[:page], per_page: 5) %>
         <%= will_paginate @transactions %>
       </div>   
-
+      
       <% end %>
 
       <!-- END RHS -->
 
       <!--LOGIN PAGE-->
+
       <% else %>
       <div class="center-container" id="login">
         <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
