@@ -1,9 +1,8 @@
-<div class="center-container" id="info">
+<div class="center-container right" id="info">
 
 <% provide(:title, 'Add Transaction') %>
 
-<h1>Transactions#new</h1>
-<p>Find me in app/views/transactions/new.html.erb</p>
+<h1>New Transaction</h1>
 
 <%= form_for(@transaction) do |f| %>
 <%= render 'shared/error_messages' %>
@@ -27,14 +26,18 @@
 </span>
 <br>
 
+<%= render 'shared/category_select' %>
 <br>
-
-<%= f.text_field :category, placeholder: "category thing" %>
 
 <%= f.text_field :description, placeholder: "description" %>
 
 <%= f.submit "Enter Transaction", class: "btn btn-large btn-primary" %>
 
 <% end %>
+
+<div id="buttons">
+    <%= link_to raw('<button class="btn btn-medium" role="button">Cancel</button>'), root_path, method: "get" %>
+</div>
+
 </div>
 
