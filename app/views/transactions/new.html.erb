@@ -12,7 +12,6 @@
 		<input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= Date.today.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
 	</div>
 
-	<br>
 	<%= f.text_field :day_spread, placeholder: "day spread" %>
 
 	<span class="select2-container form-control select select-primary">
@@ -25,9 +24,7 @@
 	</span>
 	<br>
 
-
 	<%= render 'shared/category_select' %>
-	<br>
 
 	<%= f.text_field :description, placeholder: "description" %>
 
@@ -40,4 +37,3 @@
 	</div>
 
 </div>
-
