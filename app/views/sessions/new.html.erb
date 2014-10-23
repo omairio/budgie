@@ -8,43 +8,41 @@
 
   <% else %>
 
-    <div class="recent">
+<div class="recent">
+  <h2>Recent Transactions</h2>
 
-      <h2>Recent Transactions</h2>
+  <script>
+    // $(document).ready(function(){
+    //   $('#select').change(function() {
+    //    $('#viewDay, #viewWeek, #viewMonth, #viewYear, #viewAll').hide();
+    //    $('#view' + $(this).find('option:selected').attr('id')).show();
+    //  });
+    // });
+</script>
 
-      <script>
-        $(document).ready(function(){
-          $('#select').change(function() {
-           $('#viewDay, #viewWeek, #viewMonth, #viewYear, #viewAll').hide();
-           $('#view' + $(this).find('option:selected').attr('id')).show();
-         });
-        });
-      </script>
 
-      <div id="viewTransactions">
-          <div id="viewBy">
-          <p>View transactions by:</p>
+<%= form_for(:choosedate) do |f| %>
+<%= render 'shared/error_messages' %>
 
-          <select id="select" class="form-control select select-primary" data-toggle="select">
-            <option id="Day" value="Day">Day</option>
-            <option id="Week" value="Week">Week</option>
-            <option id="Month" value="Month">Month</option>
-            <option id="Year" value="Year">Year</option>
-            <option id="All" value="All" selected>All</option>
-          </select>
+<div class="float-left">
+  <p>View transactions by:</p>
 
-          <div id="viewDay">view by day</div>
-          <div id="viewWeek">view by week</div>
-          <div id="viewMonth">view by month</div>
-          <div id="viewYear">view by year</div>
-          <div id="viewAll">view all</div>
-        </div>
+  <select id="choosedate_spread_type" name="choosedate[type]" class="form-control select select-primary" data-toggle="select">
+    <option id="Day" value="Day" <% if current_user.date_type == "Day" %>selected <%end%>>Day</option>
+    <option id="Week" value="Week" <% if current_user.date_type == "Week" %>selected <%end%>>Week</option>
+    <option id="Month" value="Month" <% if current_user.date_type == "Month" %>selected <%end%>>Month</option>
+    <option id="Year" value="Year" <% if current_user.date_type == "Year" %>selected <%end%>>Year</option>
+    <option id="All" value="All" <% if current_user.date_type == "All" %>selected <%end%>>All</option>
+  </select>
+<%= f.submit "Go", class: "btn btn-large btn-danger" %>
+</div>
 
-        <div id="pickDate">
-          <p>Starting from:</p>
-          <input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= Date.today.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
-        </div>
-      </div>
+<div class ="float-right">
+  <p>Starting from:</p>
+  <input type="text" id="choosedate" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= current_user.date.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="choosedate[date]">
+</div>
+
+<% end %>
 
 
       <!-- TRANSACTIONS TABLE -->
@@ -137,6 +135,3 @@
   </div>
 
 <% end %>
-
-
-

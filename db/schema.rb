@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021060329) do
+ActiveRecord::Schema.define(version: 20141022235228) do
 
   create_table "transactions", force: true do |t|
     t.float    "amount"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20141021060329) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.string   "last_name"
+    t.date     "date"
+    t.string   "date_type"
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
