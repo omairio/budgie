@@ -44,7 +44,7 @@
         <% @total = get_total %>
 
         <% if @total < 0 %>
-        <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>');">
+        <div class="col-xs-6 left background" style="background: url('<%= asset_path 'sunset1.jpg' %>');">
           
         <% elsif @total >= 0 and @total < 500 %>
           <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset2.jpg' %>');">
