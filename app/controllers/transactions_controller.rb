@@ -115,7 +115,7 @@ class TransactionsController < ApplicationController
       end
     end
   end
-
+  
   private
   def transaction_params
     params.require(:transaction).permit(:amount, :category, :date, :day_spread, :spread_type, :description)

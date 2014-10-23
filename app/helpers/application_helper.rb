@@ -1,14 +1,27 @@
 module ApplicationHelper
-	def day_transaction()
-		current_user.transactions.where(date: Date.parse(Date.today.strftime("%d-%m-%Y")))
+	def day_transaction(cdate)
+		current_user.transactions.where(date: Date.parse(cdate))
 	end
 
-	def month_transaction(month)
-		current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
+	def week_transaction(cdate)
+		start_date = Date.parse(cdate)
+		end_date = start_date + 1.weeks
+		current_user.transactions.where(date: start_date..end_date)
+		# current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
 	end
 
-	def year_transaction(year)
-		current_user.transactions.where("strftime('%Y', date) + 0 = ?", year)
+	def month_transaction(cdate)
+		start_date = Date.parse(cdate)
+		end_date = start_date + 1.months
+		current_user.transactions.where(date: start_date..end_date)
+		# current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
+	end
+
+	def year_transaction(cdate)
+		start_date = Date.parse(cdate)
+		end_date = start_date + 1.years
+		current_user.transactions.where(date: start_date..end_date)
+		# current_user.transactions.where("strftime('%Y', date) + 0 = ?", year)
 	end
 
 	def all_transactions()
@@ -17,6 +30,24 @@ module ApplicationHelper
 
 	def get_total()
 		@total = 0
+
+		if (!current_user.date_type.nil?)
+			if (current_user.date_type == 'All')
+				@transactions = all_transactions()
+			elsif (current_user.date_type == 'Day')
+				@transactions = day_transaction(current_user.date.strftime("%d/%m/%Y"))
+			elsif (current_user.date_type == 'Week')
+				@transactions = week_transaction(current_user.date.strftime("%d/%m/%Y"))
+			elsif (current_user.date_type == 'Month')
+				@transactions = month_transaction(current_user.date.strftime("%d/%m/%Y"))
+			elsif (current_user.date_type == 'Year')
+				@transactions = year_transaction(current_user.date.strftime("%d/%m/%Y"))
+			end
+			# redirect_to about_path
+		else
+			@transactions = day_transaction(current_user.date.strftime("%d/%m/%Y"))
+		end
+
 		@transactions.each do |t|
 			@total += t.amount
 		end

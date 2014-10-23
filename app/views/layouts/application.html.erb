@@ -16,7 +16,7 @@
 
 <body>
 	<% if signed_in? %>
-  <% @transactions = day_transaction() %>
+ 
   <div id="login_status">
     <%= render 'shared/login_message' %>
   </div>
@@ -61,8 +61,19 @@
         <p>of your previous month's expenditure.</p> -->
         <p>You have saved</p>
         <h1><%= sprintf("%.2f", @total) %></h1>
-
+        <% if current_user.date_type == "Day" %>
         <p>today</p>
+        <% elsif current_user.date_type == "Week" %>
+        <p>this week</p>
+        <% elsif current_user.date_type == "Month" %>
+        <p>this month</p>
+        <% elsif current_user.date_type == "Year" %>
+        <p>this year</p>
+        <% elsif current_user.date_type == "All" %>
+        <p>overall</p>
+        <% else %>
+        <p>today</p>
+        <% end %>
 
       </div>
 

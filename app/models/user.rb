@@ -28,10 +28,10 @@ class User < ActiveRecord::Base
 		uniqueness: { case_sensitive: false }
 		})
 
-	validates(:password, {
+	validates :password,
 		presence: true,
-		length: { minimum: 8 }
-		})
+		length: { minimum: 8 },
+		on: :create
 	
 	has_secure_password
 
@@ -50,6 +50,7 @@ def User.encrypt(token)
 end
 
 private 
+
 
 # 
 def create_remember_token

@@ -7,6 +7,7 @@ module SessionsHelper
       }
       user.update_attribute(:remember_token, User.encrypt(remember_token))
       self.current_user = user
+      current_user.update_attributes(:date => Date.today, :date_type => 'All')
    end
 
    def sign_out

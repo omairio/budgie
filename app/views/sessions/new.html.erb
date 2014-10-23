@@ -10,100 +10,101 @@
   <h2>Recent Transactions</h2>
 
   <script>
-    $(document).ready(function(){
-      $('#select').change(function() {
-       $('#viewDay, #viewWeek, #viewMonth, #viewYear, #viewAll').hide();
-       $('#view' + $(this).find('option:selected').attr('id')).show();
-     });
-    });
-  </script>
+    // $(document).ready(function(){
+    //   $('#select').change(function() {
+    //    $('#viewDay, #viewWeek, #viewMonth, #viewYear, #viewAll').hide();
+    //    $('#view' + $(this).find('option:selected').attr('id')).show();
+    //  });
+    // });
+</script>
 
-  <div class="float-left">
-    <p>View transactions by:</p>
 
-    <select id="select" class="form-control select select-primary" data-toggle="select">
-      <option id="Day" value="Day">Day</option>
-      <option id="Week" value="Week">Week</option>
-      <option id="Month" value="Month">Month</option>
-      <option id="Year" value="Year">Year</option>
-      <option id="All" value="All" selected>All</option>
-    </select>
+<%= form_for(:choosedate) do |f| %>
+<%= render 'shared/error_messages' %>
 
-<!--       <div id="viewDay">view by day</div>
-      <div id="viewWeek">view by week</div>
-      <div id="viewMonth">view by month</div>
-      <div id="viewYear">view by year</div>
-      <div id="viewAll">view all</div> -->
-    </div>
+<div class="float-left">
+  <p>View transactions by:</p>
 
-    <div class ="float-right">
-      <p>Starting from:</p>
-      <input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= Date.today.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
-    </div><br>
+  <select id="choosedate_spread_type" name="choosedate[type]" class="form-control select select-primary" data-toggle="select">
+    <option id="Day" value="Day" <% if current_user.date_type == "Day" %>selected <%end%>>Day</option>
+    <option id="Week" value="Week" <% if current_user.date_type == "Week" %>selected <%end%>>Week</option>
+    <option id="Month" value="Month" <% if current_user.date_type == "Month" %>selected <%end%>>Month</option>
+    <option id="Year" value="Year" <% if current_user.date_type == "Year" %>selected <%end%>>Year</option>
+    <option id="All" value="All" <% if current_user.date_type == "All" %>selected <%end%>>All</option>
+  </select>
+<%= f.submit "Go", class: "btn btn-large btn-danger" %>
+</div>
 
-    <!-- TRANSACTIONS TABLE -->
-    <% @transactions = @transactions.paginate(page: params[:page], per_page: 5) %>
-    <% @transactions.each do |t| %>
-    
-    <table class="zebra">
-      <div>
-        <thead> 
-          <tr> 
-            <th><%= t.date %></th> 
+<div class ="float-right">
+  <p>Starting from:</p>
+  <input type="text" id="choosedate" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= current_user.date.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="choosedate[date]">
+</div>
+
+<% end %>
+
+
+
+
+<!-- TRANSACTIONS TABLE -->
+<% @transactions = @transactions.paginate(page: params[:page], per_page: 5) %>
+<% @transactions.each do |t| %>
+
+<table class="zebra">
+  <div>
+    <thead> 
+      <tr> 
+        <th><%= t.date %></th> 
+      </tr> 
+    </thead>
+
+    <tbody> 
+      <tr> 
+        <td><h2><%= t.category %></h2>
+         <% if !t.description.nil? and !t.description.blank? %>
+         <%= t.description %>
+         <% end %></td> 
+         <td>
+          <% temp = t.amount %>
+          <% if temp < 0 %>
+          <h1 id="minus">-
+            <% temp *= -1 %>
+            <% else %>
+            <h1 id="plus">
+              <% end %>
+              $<%= sprintf("%.2f", temp) %></h1>
+            </td> 
           </tr> 
-        </thead>
+        </tbody>
+        <div class="btn-group float-left" id="transaction">
+          <button type="button" class="btn btn-default btn-lg">
+            <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), t, method: :get, confirm: "Are you sure?" %>
+          </button>
+          <button type="button" class="btn btn-default btn-lg">
+            <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'), edit_transaction_path(t) %>
+          </button>
+        </div>     
+      </table> 
+      <% end %>
 
-        <tbody> 
-          <tr> 
-            <td><h2><%= t.category %></h2>
-             <% if !t.description.nil? and !t.description.blank? %>
-             <%= t.description %>
-             <% end %></td> 
-             <td>
-              <% temp = t.amount %>
-              <% if temp < 0 %>
-              <h1 id="minus">-
-                <% temp *= -1 %>
-                <% else %>
-                <h1 id="plus">
-                  <% end %>
-                  $<%= sprintf("%.2f", temp) %></h1>
-                </td> 
-              </tr> 
-            </tbody>
-            <div class="btn-group float-left" id="transaction">
-              <button type="button" class="btn btn-default btn-lg">
-                <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), t, method: :get, confirm: "Are you sure?" %>
-              </button>
-              <button type="button" class="btn btn-default btn-lg">
-                <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'), edit_transaction_path(t) %>
-              </button>
-            </div>     
-          </table> 
-          <% end %>
+      <%= will_paginate @transactions %>
+    </div>   
 
-          <%= will_paginate @transactions %>
-        </div>   
-        
-        <% end %>
+    <% end %>
 
 
-        <!-- END RHS -->
+    <!-- END RHS -->
 
-        <!--LOGIN PAGE-->
+    <!--LOGIN PAGE-->
 
-        <% else %>
-        <div class="center-container" id="login">
-          <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
-          <%= form_for(:session) do |f|%>
-          <%= f.text_field :email, :placeholder => "email" %>
-          <%= f.password_field :password, :placeholder => "password" %>
-          <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-          <% end %>
-          <%= link_to "create account", signup_path, method: "get" %>
-          <p><a href="#">forgot password?</a></p>
-        </div>
-        <% end %>
-
-
-
+    <% else %>
+    <div class="center-container" id="login">
+      <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
+      <%= form_for(:session) do |f|%>
+      <%= f.text_field :email, :placeholder => "email" %>
+      <%= f.password_field :password, :placeholder => "password" %>
+      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+      <% end %>
+      <%= link_to "create account", signup_path, method: "get" %>
+      <p><a href="#">forgot password?</a></p>
+    </div>
+    <% end %>
