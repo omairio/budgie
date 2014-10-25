@@ -4,12 +4,12 @@
 
 	<h1>New Transaction</h1>
 
-	<%= form_for(@transaction) do |f| %>
+	<%= form_for(@new_transaction) do |f| %>
 	<%= render 'shared/error_messages' %>
 	<%= f.text_field :amount, placeholder: "amount" %>
 
 	<div>
-		<input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= Date.today.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
+		<input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= current_user.date.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
 	</div>
 
 	<%= f.text_field :day_spread, placeholder: "day spread" %>

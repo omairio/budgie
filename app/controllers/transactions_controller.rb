@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
   include SessionsHelper
 
   def new
-    @transaction = Transaction.new
+    @new_transaction = Transaction.new
     # redirect_to root_path
   end
 
@@ -22,6 +22,11 @@ class TransactionsController < ApplicationController
       elsif (transaction.spread_type == "Year")
         type = 365
       end
+    else 
+      @new_transaction = Transaction.new
+      new
+      render 'new'
+      return
     end
 
     day_amount = transaction.day_spread * type
@@ -40,6 +45,8 @@ class TransactionsController < ApplicationController
     end
 
     if (!transaction.save)
+      @new_transaction = Transaction.new
+      new
       render 'new'
       return
     end    
@@ -51,7 +58,6 @@ class TransactionsController < ApplicationController
       transaction_new.amount = transaction.amount
       transaction_new.date = transaction.date + 1.days
       transaction = transaction_new
-      @yes = transaction.save
       i += 1
     end
 
@@ -60,34 +66,34 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    @transaction = Transaction.find(params[:id])
+    transaction = Transaction.find(params[:id])
 
-    @type = 1
+    type = 1
     if(@transaction.spread_type == "Day")
-      @type = 1
+      type = 1
     elsif (@transaction.spread_type == "Week")
-      @type = 7
+      type = 7
     elsif (@transaction.spread_type == "Month")
-      @type = 30
+      type = 30
     elsif (@transaction.spread_type == "Year")
-      @type = 365
+      type = 365
     end
 
-    @transaction.per_day = @transaction.amount/(@transaction.day_spread * @type)
+    transaction.per_day = transaction.amount/(transaction.day_spread * @type)
 
-    @cat = @transaction.category
+    @cat = transaction.category
 
     if (@cat == "Personal Income" or @cat == "Investment Income")
-      if (@transaction.amount < 0)
-        @transaction.amount *= -1
+      if (transaction.amount < 0)
+        transaction.amount *= -1
       end
     elsif (@cat != "Other")
-      if (@transaction.amount > 0)
-        @transaction.amount *= -1
+      if (transaction.amount > 0)
+        transaction.amount *= -1
       end
     end
 
-    if (@transaction.update_attributes(transaction_params))
+    if (transaction.update_attributes(transaction_params))
       redirect_to root_path
     else
       render 'edit'
@@ -110,8 +116,8 @@ class TransactionsController < ApplicationController
 
   def edit
     if (signed_in?)
-      @transaction = Transaction.find(params[:id])
-      if (current_user.id == @transaction.user_id)
+      transaction = Transaction.find(params[:id])
+      if (current_user.id == transaction.user_id)
       end
     end
   end
