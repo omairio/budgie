@@ -17,12 +17,12 @@
 
 	<%= f.password_field :password_confirmation, placeholder: "enter password again"%>
 
-	<%= f.submit "Update", class: "btn btn-medium btn-primary" %>
+	<%= f.submit "Update", class: "btn btn-large btn-primary" %>
 
 	<% end %>
 
 	<div id="buttons">
-	    <%= link_to raw('<button class="btn btn-large btn-danger" role="button">Delete Account</button>'), root_path, method: "get" %>
+	    <%= link_to raw('<button class="btn btn-primary btn-danger" role="button">Delete Account</button>'), root_path, method: "get" %>
 	</div>
 
 	<div id="buttons">
