@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if (signed_in)
+    if (signed_in?)
       sign_out
       User.find(params[:id]).destroy
       redirect_to root_path

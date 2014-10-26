@@ -89,10 +89,10 @@ module ApplicationHelper
 				@date_list << ""
 				
 				if (current_user.date_type == "All")
-					@date_transaction_list << t.amount
+					@date_transaction_list << t.amount.round(2)
 					temp += t.amount
 				else
-					@date_transaction_list << t.per_day
+					@date_transaction_list << t.per_day.round(2)
 					temp += t.per_day
 				end
 				
@@ -141,7 +141,7 @@ module ApplicationHelper
 		end
 
 		date_hash.keys.each do |k|
-			@date_transaction_list << date_hash[k]
+			@date_transaction_list << date_hash[k].round(2)
 		end
 
 		# @category_hash.keys.each do |c| 

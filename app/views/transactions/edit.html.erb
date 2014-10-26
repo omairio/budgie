@@ -22,6 +22,7 @@
 
 	<div id="buttons">
     	<%= link_to raw('<button class="btn btn-medium" role="button">Cancel</button>'), root_path, method: "get" %>
+    	<%= link_to raw('<button class="btn btn-primary btn-danger" role="button">Delete Transaction</button>'), @transaction, method: :delete,  confirm: "Are you sure?" %>
 	</div>
 
 </div>

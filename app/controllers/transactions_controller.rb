@@ -12,6 +12,15 @@ class TransactionsController < ApplicationController
 
     # Spread amount over a few days
     transaction.end_date = transaction.date
+    transaction.per_day = 0
+
+    if (!transaction.save)
+      @new_transaction = Transaction.new
+      new()
+      render 'new'
+      return
+    end
+
     if (!transaction.day_spread.nil?)
       if(transaction.spread_type == "Day")
         transaction.end_date += transaction.day_spread.days
@@ -47,7 +56,6 @@ class TransactionsController < ApplicationController
 
     if (!transaction.save)
       @new_transaction = Transaction.new
-      @LIFE = transaction
       new()
       render 'new'
       return
