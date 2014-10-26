@@ -44,15 +44,15 @@
         <% @total = get_total %>
 
         <% if @total < 0 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>');">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>'); background-size: cover;">
         <% elsif @total >= 0 and @total < 500 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset2.jpg' %>');">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset2.jpg' %>'); background-size: cover;">
         <% elsif @total >= 500  and @total < 1000 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset3.jpg' %>');">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset3.jpg' %>'); background-size: cover;">
         <% elsif @total >= 1000 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset4.jpg' %>');">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset4.jpg' %>'); background-size: cover;">
         <% else %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>');">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>'); background-size: cover;">
         <% end %>
 
        <!--  <p>You have spent</p>
@@ -96,71 +96,75 @@
           <% end %>
         </p>
 
+
 <% if !@transactions.nil? and !@transactions.empty? %>
+<div id="line-chart">
 <script>
-  Highcharts.setOptions({
-    chart: {
-      style: {
-        fontFamily: '\'Source Sans Pro\', sans-serif'
-      }
-    }
-  });
-  $(function () {
-    $('#line-chart').highcharts({
-      chart: {
-        backgroundColor: 'rgba(255, 255, 255, 0.7)'
-      },
-      title: {
-        <% if (current_user.date_type == "Day") %>
-        text: 'Daily Spending'
-        <% elsif (current_user.date_type == "Week") %>
-        text: 'Weekly Spending'
-        <% elsif (current_user.date_type == "Month") %>
-        text: 'Monthly Spending'
-        <% elsif (current_user.date_type == "Year") %>
-        text: 'Yearly Spending'
-        <% elsif (current_user.date_type == "All") %>
-        text: 'Overall Spending'
-        <% end %>
-        ,
-        //center
-      },
-    subtitle: {
-      x: -20
-    },
-    xAxis: {
-      categories: <%= raw @date_list %>
-    },
-    yAxis: {
-      title: {
-        text: 'Money'
-      },
-      plotLines: [{
-        value: 0,
-        width: 1,
-        color: '#808080'
-      }]
-    },
-    tooltip: {
-      // valuePrefix: '$'
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle',
-      borderWidth: 0
-    },
-    series: [{
-      name: 'Savings',
-      data: <%= raw @date_transaction_list %>
-    }]
-  });
+          Highcharts.setOptions({
+            chart: {
+              style: {
+                fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
+              }
+            }
+          });
+          $(function () {
+            $('#line-chart').highcharts({
+              chart: {
+               backgroundColor: 'rgba(255, 255, 255, 0.7)'
+              },
+              title: {
+                <% if (current_user.date_type == "Day") %>
+                text: 'Daily Spending'
+                <% elsif (current_user.date_type == "Week") %>
+                text: 'Weekly Spending'
+                <% elsif (current_user.date_type == "Month") %>
+                text: 'Monthly Spending'
+                <% elsif (current_user.date_type == "Year") %>
+                text: 'Yearly Spending'
+                <% elsif (current_user.date_type == "All") %>
+                text: 'Overall Spending'
+                <% end %>
+                ,
+           //center
+          },
+          subtitle: {
+
+            x: -20
+          },
+          xAxis: {
+            categories: <%= raw @date_list %>
+          },
+          yAxis: {
+            title: {
+              text: 'Money'
+            },
+            plotLines: [{
+              value: 0,
+              width: 1,
+              color: '#808080'
+            }]
+          },
+          tooltip: {
+            // valuePrefix: '$'
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+          },
+          series: [{
+            name: 'Savings',
+            data: <%= raw @date_transaction_list %>
+          }]
+        });
+
 }
 );
 </script>
+</div>
 
-<div id="line-chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
+<div id="pie-chart">
 <script>
 
 $(function () {
@@ -211,7 +215,7 @@ $(function () {
 
 </script>
 
-<div id="pie-chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+</div>
 
 <% end %>
 
@@ -223,13 +227,9 @@ $(function () {
 
         <div class="btn-group-vertical float-left" id="icons">
 
-          <div>
-            <%= link_to raw('<button type="button" class="btn btn-large btn-lg"><span class="glyphicon glyphicon-plus"></span></button>'), new_transaction_path, method: "get" %>
-          </div>
+            <%= link_to raw('<span class="glyphicon glyphicon-plus"></span>'), new_transaction_path, method: "get", class: 'btn btn-large btn-lg"' %>
           
-          <div>
-            <%= link_to raw('<button type="button" class="btn btn-large btn-lg"><span class="glyphicon glyphicon-cog"></span></button>'), myaccount_path, method: "get" %>
-          </div>
+            <%= link_to raw('<span class="glyphicon glyphicon-cog"></span>'), myaccount_path, method: "get", class: 'btn btn-large btn-lg' %>
 
         </div>
 

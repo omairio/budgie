@@ -11,7 +11,6 @@ class TransactionsController < ApplicationController
     transaction.user_id = current_user.id
 
     # Spread amount over a few days
-    type = 1
     transaction.end_date = transaction.date
     if (!transaction.day_spread.nil?)
       if(transaction.spread_type == "Day")
@@ -61,19 +60,34 @@ class TransactionsController < ApplicationController
   def update
     transaction = Transaction.find(params[:id])
 
+    if (!transaction.update_attributes(transaction_params))
+      return
+    end
+
+    transaction.date = params[:transaction][:date]
     transaction.end_date = transaction.date
-      if(transaction.spread_type == "Day")
-        transaction.end_date += transaction.day_spread.days
-      elsif (transaction.spread_type == "Week")
-        transaction.end_date += transaction.day_spread.weeks
-      elsif (transaction.spread_type == "Month")
-        transaction.end_date += transaction.day_spread.months
-      elsif (transaction.spread_type == "Year")
-        transaction.end_date += transaction.day_spread.years
-      end
+
+    transaction.spread_type = params[:transaction][:spread_type]
+    transaction.day_spread = params[:transaction][:day_spread]
+
+    # if (transaction.end_date.nil?)
+    #   redirect_to about_path
+    #   return
+    # end
+
+    if(transaction.spread_type == "Day")
+      transaction.end_date += transaction.day_spread.days
+    elsif (transaction.spread_type == "Week")
+      transaction.end_date += transaction.day_spread.weeks
+    elsif (transaction.spread_type == "Month")
+      transaction.end_date += transaction.day_spread.months
+    elsif (transaction.spread_type == "Year")
+      transaction.end_date += transaction.day_spread.years
+    end
 
     transaction.day_spread = (transaction.end_date - transaction.date).to_i
     transaction.per_day = transaction.amount/(transaction.day_spread)
+
 
     if (transaction.category == "Personal Income" or transaction.category == "Investment Income")
       if (transaction.amount < 0)
@@ -85,12 +99,12 @@ class TransactionsController < ApplicationController
       end
     end
 
-    if (transaction.update_attributes(transaction_params))
-      redirect_to root_path
-    else
+    if (!transaction.update_attributes(end_date: transaction.end_date, per_day: transaction.per_day, day_spread: transaction.day_spread))
       edit()
       render 'edit'
+      return
     end
+    redirect_to root_path
   end
 
   def show
