@@ -1,27 +1,27 @@
 module ApplicationHelper
 	def day_transaction(cdate)
 		cdate = Date.parse(cdate)
-		current_user.transactions.where('date <= ? AND ? <= end_date', cdate, cdate)
+		current_user.transactions.where('date <= ? AND ? < end_date', cdate, cdate)
 	end
 
 	def week_transaction(cdate)
 		start_date = Date.parse(cdate)
 		end_date = start_date + 1.weeks
-		current_user.transactions.where('(date <= ? AND ? <= end_date) OR (date <= ? AND ? <= end_date) OR (date >= ? AND end_date <= ?)', start_date, start_date, end_date, end_date, start_date, end_date)
+		current_user.transactions.where('(date <= ? AND ? < end_date) OR (date <= ? AND ? < end_date) OR (date >= ? AND end_date < ?)', start_date, start_date, end_date, end_date, start_date, end_date)
 		# current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
 	end
 
 	def month_transaction(cdate)
 		start_date = Date.parse(cdate)
 		end_date = start_date + 1.months
-		current_user.transactions.where('(date <= ? AND ? <= end_date) OR (date <= ? AND ? <= end_date) OR (date >= ? AND end_date <= ?)', start_date, start_date, end_date, end_date, start_date, end_date)
+		current_user.transactions.where('(date <= ? AND ? < end_date) OR (date <= ? AND ? < end_date) OR (date >= ? AND end_date < ?)', start_date, start_date, end_date, end_date, start_date, end_date)
 		# current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
 	end
 
 	def year_transaction(cdate)
 		start_date = Date.parse(cdate)
 		end_date = start_date + 1.years
-		current_user.transactions.where('(date <= ? AND ? <= end_date) OR (date <= ? AND ? <= end_date) OR (date >= ? AND end_date <= ?)', start_date, start_date, end_date, end_date, start_date, end_date)
+		current_user.transactions.where('(date <= ? AND ? < end_date) OR (date <= ? AND ? < end_date) OR (date >= ? AND end_date < ?)', start_date, start_date, end_date, end_date, start_date, end_date)
 		# current_user.transactions.where("strftime('%Y', date) + 0 = ?", year)
 	end
 
@@ -110,19 +110,19 @@ module ApplicationHelper
 			if (start_date != end_date)
 
 				i = 0
-				if (t.date <= start_date and start_date <= t.end_date)
+				if (t.date <= start_date and start_date < t.end_date)
 					while (i < (t.end_date - start_date).to_i)
 						date_hash[(start_date + i.days).strftime(format)] += t.per_day
 						temp += t.per_day
 						i += 1
 					end
-				elsif (t.date >= start_date and t.end_date <= end_date)
+				elsif (t.date >= start_date and t.end_date < end_date)
 					while (i < (t.end_date - t.date).to_i)
 						date_hash[(t.date + i.days).strftime(format)] += t.per_day
 						temp += t.per_day
 						i += 1
 					end
-				elsif (t.date <= end_date and end_date <= t.end_date)
+				elsif (t.date <= end_date and end_date < t.end_date)
 					while (i < (end_date - t.date).to_i)
 						date_hash[(t.date + i.days).strftime(format)] += t.per_day
 						temp += t.per_day
