@@ -22,7 +22,7 @@
 <%= form_for(:choosedate) do |f| %>
 <%= render 'shared/error_messages' %>
 
-<div>
+<div id="recent_transactions">
   <p>View transactions by:</p>
 
   <select id="choosedate_spread_type" name="choosedate[type]" class="form-control select select-primary" data-toggle="select">
@@ -32,12 +32,12 @@
     <option id="Year" value="Year" <% if current_user.date_type == "Year" %>selected <%end%>>Year</option>
     <option id="All" value="All" <% if current_user.date_type == "All" %>selected <%end%>>All</option>
   </select>
-  <%= f.submit "Go", class: "btn btn-medium btn-primary" %>
-</div>
 
-<div>
   <p>Starting from:</p>
   <input type="text" id="choosedate" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= current_user.date.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="choosedate[date]">
+
+  <%= f.submit "Go", class: "btn btn-medium btn-primary" %>
+
 </div>
 
 <% end %>
@@ -81,9 +81,9 @@
         </tbody>
         <div class="btn-group float-left" id="transaction">
           
-            <%= link_to raw('<button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'), t, method: :delete, confirm: "Are you sure?" %>
+            <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), t, method: :delete, class: 'btn btn-default btn-l', confirm: "Are you sure?" %>
           
-            <%= link_to raw('<button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span></button>'), edit_transaction_path(t) %>
+            <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'), edit_transaction_path(t), class: 'btn btn-default btn-l' %>
           
         </div>     
       </table> 
