@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
       end
     else 
       @new_transaction = Transaction.new
-      new
+      new()
       render 'new'
       return
     end
@@ -46,7 +46,7 @@ class TransactionsController < ApplicationController
 
     if (!transaction.save)
       @new_transaction = Transaction.new
-      new
+      new()
       render 'new'
       return
     end    
@@ -69,25 +69,23 @@ class TransactionsController < ApplicationController
     transaction = Transaction.find(params[:id])
 
     type = 1
-    if(@transaction.spread_type == "Day")
+    if(transaction.spread_type == "Day")
       type = 1
-    elsif (@transaction.spread_type == "Week")
+    elsif (transaction.spread_type == "Week")
       type = 7
-    elsif (@transaction.spread_type == "Month")
+    elsif (transaction.spread_type == "Month")
       type = 30
-    elsif (@transaction.spread_type == "Year")
+    elsif (transaction.spread_type == "Year")
       type = 365
     end
 
-    transaction.per_day = transaction.amount/(transaction.day_spread * @type)
+    transaction.per_day = transaction.amount/(transaction.day_spread * type)
 
-    @cat = transaction.category
-
-    if (@cat == "Personal Income" or @cat == "Investment Income")
+    if (transaction.category == "Personal Income" or transaction.category == "Investment Income")
       if (transaction.amount < 0)
         transaction.amount *= -1
       end
-    elsif (@cat != "Other")
+    elsif (transaction.category != "Other")
       if (transaction.amount > 0)
         transaction.amount *= -1
       end
@@ -96,6 +94,7 @@ class TransactionsController < ApplicationController
     if (transaction.update_attributes(transaction_params))
       redirect_to root_path
     else
+      edit()
       render 'edit'
     end
   end
@@ -116,8 +115,8 @@ class TransactionsController < ApplicationController
 
   def edit
     if (signed_in?)
-      transaction = Transaction.find(params[:id])
-      if (current_user.id == transaction.user_id)
+      @transaction = Transaction.find(params[:id])
+      if (current_user.id == @transaction.user_id)
       end
     end
   end

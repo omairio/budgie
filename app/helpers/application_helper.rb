@@ -79,7 +79,7 @@ module ApplicationHelper
 		end
 		@transactions.each do |t|
 
-			if (current_user.date_type == 'Day')
+			if (current_user.date_type == 'Day' or current_user.date_type == "All")
 				@date_list << ""
 				@transaction_list << t.amount
 			elsif (current_user.date_type == "Week")
@@ -96,6 +96,18 @@ module ApplicationHelper
 			@transaction_list << date_hash[k]
 		end
 		@total
+	end
+
+	def get_categories()
+		["Personal Income", "Investment Income", "Food", "Home", 
+			"Travel", "Vehicle", "Financial & Profession", "Leisure",
+			"Education", "Gadgets & Devices", "Clothes", "Health", "Personal Care",
+			"Phone & Internet", "Holidays", "Gambling", "Pets", "Giving to others",
+			"Other"]
+	end
+
+	def get_spread_types()
+		["Day", "Week", "Month", "Year"]
 	end
 
 	def full_title(page_title)
