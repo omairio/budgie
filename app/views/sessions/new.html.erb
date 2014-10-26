@@ -1,24 +1,8 @@
 <!-- HOME -->
 <% if signed_in? %>
 
-<!-- Transactions -->
-<% if @transactions.nil? %>
-<h2>NO TRANSACTIONS</h2>
-<% else %>
 
 <div class="recent">
-  <h2>Recent Transactions</h2>
-
-  <script>
-    // $(document).ready(function(){
-    //   $('#select').change(function() {
-    //    $('#viewDay, #viewWeek, #viewMonth, #viewYear, #viewAll').hide();
-    //    $('#view' + $(this).find('option:selected').attr('id')).show();
-    //  });
-    // });
-</script>
-
-
 <%= form_for(:choosedate) do |f| %>
 <%= render 'shared/error_messages' %>
 
@@ -40,8 +24,16 @@
   <input type="text" id="choosedate" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= current_user.date.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="choosedate[date]">
 </div>
 
-<% end %>
+<!-- Transactions -->
+<% if @transactions.nil? or @transactions.empty?%>
+<h2>NO TRANSACTIONS</h2>
+<% else %>
 
+
+  <h2>Recent Transactions</h2>
+
+
+<% end %>
 
 
 

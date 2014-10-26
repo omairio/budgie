@@ -95,7 +95,7 @@
           <% end %>
         </p>
 
-<% if !@transactions.nil? %>
+<% if !@transactions.nil? and !@transactions.empty? %>
 <script>
           Highcharts.setOptions({
             chart: {
