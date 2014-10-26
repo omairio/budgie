@@ -98,64 +98,63 @@
 
 <% if !@transactions.nil? %>
 <script>
-          Highcharts.setOptions({
-            chart: {
-              style: {
-                fontFamily: 'serif'
-              }
-            }
-          });
-          $(function () {
-            $('#line-chart').highcharts({
-              chart: {
-               backgroundColor: 'rgba(255, 255, 255, 0.7)'
-              },
-              title: {
-                <% if (current_user.date_type == "Day") %>
-                text: 'Daily Spending'
-                <% elsif (current_user.date_type == "Week") %>
-                text: 'Weekly Spending'
-                <% elsif (current_user.date_type == "Month") %>
-                text: 'Monthly Spending'
-                <% elsif (current_user.date_type == "Year") %>
-                text: 'Yearly Spending'
-                <% elsif (current_user.date_type == "All") %>
-                text: 'Overall Spending'
-                <% end %>
-                ,
-           //center
-          },
-          subtitle: {
-
-            x: -20
-          },
-          xAxis: {
-            categories: <%= raw @date_list %>
-          },
-          yAxis: {
-            title: {
-              text: 'Money'
-            },
-            plotLines: [{
-              value: 0,
-              width: 1,
-              color: '#808080'
-            }]
-          },
-          tooltip: {
-            // valuePrefix: '$'
-          },
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-          },
-          series: [{
-            name: 'Savings',
-            data: <%= raw @date_transaction_list %>
-          }]
-        });
+  Highcharts.setOptions({
+    chart: {
+      style: {
+        fontFamily: 'serif'
+      }
+    }
+  });
+  $(function () {
+    $('#line-chart').highcharts({
+      chart: {
+        backgroundColor: 'rgba(255, 255, 255, 0.7)'
+      },
+      title: {
+        <% if (current_user.date_type == "Day") %>
+        text: 'Daily Spending'
+        <% elsif (current_user.date_type == "Week") %>
+        text: 'Weekly Spending'
+        <% elsif (current_user.date_type == "Month") %>
+        text: 'Monthly Spending'
+        <% elsif (current_user.date_type == "Year") %>
+        text: 'Yearly Spending'
+        <% elsif (current_user.date_type == "All") %>
+        text: 'Overall Spending'
+        <% end %>
+        ,
+        //center
+      },
+    subtitle: {
+      x: -20
+    },
+    xAxis: {
+      categories: <%= raw @date_list %>
+    },
+    yAxis: {
+      title: {
+        text: 'Money'
+      },
+      plotLines: [{
+        value: 0,
+        width: 1,
+        color: '#808080'
+      }]
+    },
+    tooltip: {
+      // valuePrefix: '$'
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle',
+      borderWidth: 0
+    },
+    series: [{
+      name: 'Savings',
+      data: <%= raw @date_transaction_list %>
+    }]
+  });
 }
 );
 </script>
