@@ -1,7 +1,7 @@
 <% if !@user.nil? and @user.errors.any? %>
 <% @error = @user %>
-<% elsif !@transaction.nil? and @transaction.errors.any? %>
-<% @error = @transaction %>
+<% elsif !@new_transaction.nil? and @new_transaction.errors.any? %>
+<% @error = @new_transaction %>
 <% end %>
 <% if !@error.nil? %>
   <div id="error_explanation">

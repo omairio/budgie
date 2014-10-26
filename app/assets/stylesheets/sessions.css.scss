@@ -36,10 +36,10 @@ table th + th
 .pagination {
 	background: #f1f1f1;
  	border: 1px solid #e5e5e5;
-  text-align: center;
-  padding: 1em;
-  cursor: default; }
-  a, .apple_pagination span {
+  	text-align: center;
+  	padding: 1em;
+	cursor: default;
+	a, .apple_pagination span {
     padding: 0.2em 0.3em; }
   .disabled {
     color: #aaaaaa; }
@@ -60,6 +60,7 @@ table th + th
     color: black; }
    a:hover, .apple_pagination a:focus {
       text-decoration: underline;
+  }
 }
 
 tbody {
