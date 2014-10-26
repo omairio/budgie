@@ -79,28 +79,65 @@ module ApplicationHelper
 
 		end
 		@transactions.each do |t|
-			amount = t.amount/((current_user.date - t.end_date).to_i)
+			# amount = t.amount/((current_user.date - t.end_date).to_i)
+
+			start_date = current_user.date
+			end_date = start_date
+			temp = 0
+
 			if (current_user.date_type == 'Day' or current_user.date_type == "All")
 				@date_list << ""
-				amount = t.amount
-				@date_transaction_list << amount
+				
+				if (current_user.date_type == "All")
+					@date_transaction_list << t.amount
+					temp += t.amount
+				else
+					@date_transaction_list << t.per_day
+					temp += t.per_day
+				end
+				
 			elsif (current_user.date_type == "Week")
-
-				date_hash[t.date.strftime("%a")] += amount
+				end_date = start_date + 1.weeks
+				format = "%a"
 			elsif (current_user.date_type == "Month")
-				date_hash[t.date.strftime("%d/%m")] += amount
+				end_date = start_date + 1.months
+				format = "%d/%m"
 			elsif (current_user.date_type == "Year")
-				date_hash[t.date.strftime("%b")] += amount
+				end_date = start_date + 1.years
+				format = "%b"
 			end
 
-			if (amount < 0)
-				@category_hash[t.category] -= amount
+			if (start_date != end_date)
+
+				i = 0
+				if (t.date <= start_date and start_date <= t.end_date)
+					while (i < (t.end_date - start_date).to_i)
+						date_hash[(start_date + i.days).strftime(format)] += t.per_day
+						temp += t.per_day
+						i += 1
+					end
+				elsif (t.date >= start_date and t.end_date <= end_date)
+					while (i < (t.end_date - t.date).to_i)
+						date_hash[(t.date + i.days).strftime(format)] += t.per_day
+						temp += t.per_day
+						i += 1
+					end
+				elsif (t.date <= end_date and end_date <= t.end_date)
+					while (i < (end_date - t.date).to_i)
+						date_hash[(t.date + i.days).strftime(format)] += t.per_day
+						temp += t.per_day
+						i += 1
+					end
+				end
+			end
+
+			if (temp < 0)
+				@category_hash[t.category] -= temp
 			else 
-				@category_hash[t.category] += amount
+				@category_hash[t.category] += temp
 			end
-	
 
-			@total += amount
+			@total += temp
 		end
 
 		date_hash.keys.each do |k|
@@ -120,18 +157,18 @@ module ApplicationHelper
 			"Education", "Gadgets & Devices", "Clothes", "Health", "Personal Care",
 			"Phone & Internet", "Holidays", "Gambling", "Pets", "Giving to others",
 			"Other"]
-	end
+		end
 
-	def get_spread_types()
-		["Day", "Week", "Month", "Year"]
-	end
+		def get_spread_types()
+			["Day", "Week", "Month", "Year"]
+		end
 
-	def full_title(page_title)
-		base_title = "Budgie"
-		if page_title.empty?
-			base_title
-		else
-			"#{base_title} | #{page_title}"
+		def full_title(page_title)
+			base_title = "Budgie"
+			if page_title.empty?
+				base_title
+			else
+				"#{base_title} | #{page_title}"
+			end
 		end
 	end
-end

@@ -55,7 +55,7 @@
       <tr>
         <th><%= t.date.strftime("%A %d/%m/%y") %>
         <% if (t.end_date - t.date).to_i > 1 %>
-        ~ <%= t.end_date.strftime("%A %d/%m/%y") %>
+        ~ <%= (t.end_date - 1.days).strftime("%A %d/%m/%y") %>
         <% end %></th> 
         <td><%= sprintf("%.2f",t.per_day) %> per day</td>
       </tr>
