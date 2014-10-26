@@ -9,7 +9,7 @@ class Transaction < ActiveRecord::Base
 
 	validates(:amount, {
 		presence: true,
-		numericality: {only_float: true, less_than: 100000000000}
+		numericality: {only_float: true, less_than: 10000000000}
 		})
 	validates(:user_id, {
 		presence: true,

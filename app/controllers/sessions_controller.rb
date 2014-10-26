@@ -28,6 +28,10 @@ class SessionsController < ApplicationController
     def create
       if (params.has_key?(:choosedate))
           current_user.update_attributes(:date_type => params[:choosedate][:type], :date => params[:choosedate][:date])
+          if (current_user.date.nil?)
+            @date_error = "Date is invalid"
+            current_user.update_attributes(:date => Date.today)
+          end
           new()
           render 'new'
           return

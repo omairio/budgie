@@ -24,4 +24,10 @@
       <li>* <%= @login_error %></li>
     </ul>
   </div>
+<% elsif !@date_error.nil? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      <%= @date_error %>
+    </div>
+  </div>
 <% end %>

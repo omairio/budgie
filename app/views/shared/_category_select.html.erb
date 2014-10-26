@@ -24,7 +24,7 @@
 
 	<div class="select2-container form-control select select-primary">
 		<select id="transaction_category" name="transaction[category]" >
-			<option selected disabled="category">category</option>
+			<option selected disabled="category">Select Category</option>
 			<% categories = get_categories() %>
 			<% categories.each do |c| %>
 			<option value="<%= c %>" <% if !@transaction.nil? and @transaction.category == c %> selected="selected" <% end %> >
