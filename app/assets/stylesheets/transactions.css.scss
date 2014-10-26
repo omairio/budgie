@@ -37,6 +37,7 @@
 	}
 }
 
+
 #transaction_spread_number {
 	width: 70px;
 }
@@ -47,4 +48,29 @@
 
 #transaction_category {
 	width: 200px;
+}
+
+#recent_transactions {
+	padding: 10px 0px;
+
+	h1 {
+		display: block;
+		margin: auto;
+		text-align: center;
+	}
+
+	input {
+		padding: 18px 10px;
+		font-size: 18px;
+		border-radius: 6px;
+	}
+
+	.btn {
+		margin-top: -8px;
+		padding: 8px 10px;
+	}
+
+	a {
+		text-decoration: none;
+	}
 }
