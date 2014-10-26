@@ -39,10 +39,12 @@ class SessionsController < ApplicationController
           sign_in user
       else
           if (!user)
-            @error = "Username does not exist"
+            @login_error = "Username does not exist"
           elsif (!user.authenticate(params[:session][:password]))
-            @error = "Password invalid"
+            @login_error = "Password invalid"
           end
+          render 'new'
+          return
       end
       current_user.update_attributes(:date_type => "Day", :date => Date.today)
       @transactions = day_transaction(current_user.date.strftime("%d/%m/%Y"))

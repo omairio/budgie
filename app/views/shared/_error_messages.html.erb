@@ -15,4 +15,13 @@
     <% end %>
     </ul>
   </div>
+<% elsif !@login_error.nil? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      Login Failed
+    </div>
+    <ul>
+      <li>* <%= @login_error %></li>
+    </ul>
+  </div>
 <% end %>

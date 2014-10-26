@@ -96,6 +96,7 @@
         <div class="center-container" id="login">
           <div class="logo"><%= image_tag("logo.png", :alt => "budgie_logo") %></div>
           <%= form_for(:session) do |f|%>
+          <%= render 'shared/error_messages' %>
           <%= f.text_field :email, :placeholder => "email" %>
           <%= f.password_field :password, :placeholder => "password" %>
           <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>

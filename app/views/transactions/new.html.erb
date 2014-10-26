@@ -8,12 +8,8 @@
 	<%= render 'shared/error_messages' %>
 	<%= f.text_field :amount, placeholder: "amount" %>
 
-	<script>
-		$('.input-group.date').datepicker({
-			todayBtn: "linked"
-		});
-	</script>
-	<div class='input-group date'>
+
+	<div class='input-group'>
 		<input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= current_user.date.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
 	</div>
 
