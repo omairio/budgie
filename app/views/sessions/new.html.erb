@@ -46,14 +46,14 @@
 
 
 <!-- TRANSACTIONS TABLE -->
-<% @transactions = @transactions.paginate(page: params[:page], per_page: 5) %>
+<% @transactions = @transactions.reorder('date DESC').paginate(page: params[:page], per_page: 5) %>
 <% @transactions.each do |t| %>
 
 <table class="zebra">
   <div>
     <thead> 
       <tr>
-        <th><%= t.date %></th> 
+        <th><%= t.date.strftime("%A %d/%m/%y") %></th> 
         <td></td>
       </tr>
     </thead>
@@ -77,12 +77,11 @@
           </tr> 
         </tbody>
         <div class="btn-group float-left" id="transaction">
-          <button type="button" class="btn btn-default btn-lg">
-            <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), t, method: :get, confirm: "Are you sure?" %>
-          </button>
-          <button type="button" class="btn btn-default btn-lg">
-            <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'), edit_transaction_path(t) %>
-          </button>
+          
+            <%= link_to raw('<button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-trash"></span></button>'), t, method: :delete, confirm: "Are you sure?" %>
+          
+            <%= link_to raw('<button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-pencil"></span></button>'), edit_transaction_path(t) %>
+          
         </div>     
       </table> 
       <% end %>
