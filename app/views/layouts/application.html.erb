@@ -44,15 +44,15 @@
         <% @total = get_total %>
 
         <% if @total < 0 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>'); background-size: cover;">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'a.jpg' %>'); background-size: cover; background-position: center;">
         <% elsif @total >= 0 and @total < 500 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset2.jpg' %>'); background-size: cover;">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'b.jpg' %>'); background-size: cover; background-position: center;">
         <% elsif @total >= 500  and @total < 1000 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset3.jpg' %>'); background-size: cover;">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'c.jpg' %>'); background-size: cover; background-position: center;">
         <% elsif @total >= 1000 %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset4.jpg' %>'); background-size: cover;">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'd.jpg' %>'); background-size: cover; background-position: center;">
         <% else %>
-          <div class="col-xs-6 left" style="background: url('<%= asset_path 'sunset1.jpg' %>'); background-size: cover;">
+          <div class="col-xs-6 left" style="background: url('<%= asset_path 'd.jpg' %>'); background-size: cover; background-position: center;">
         <% end %>
 
        <!--  <p>You have spent</p>
