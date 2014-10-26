@@ -7,56 +7,50 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    transaction = Transaction.new(transaction_params)
-    transaction.user_id = current_user.id
+    @new_transaction = Transaction.new(transaction_params)
+    @new_transaction.user_id = current_user.id
 
     # Spread amount over a few days
-    transaction.end_date = transaction.date
-    transaction.per_day = 0
+    @new_transaction.end_date = @new_transaction.date
+    @new_transaction.per_day = 0
 
-    if (!transaction.save)
-      @new_transaction = Transaction.new
-      new()
+    if (!@new_transaction.save)
       render 'new'
       return
     end
 
-    if (!transaction.day_spread.nil?)
-      if(transaction.spread_type == "Day")
-        transaction.end_date += transaction.day_spread.days
-      elsif (transaction.spread_type == "Week")
-        transaction.end_date += transaction.day_spread.weeks
-      elsif (transaction.spread_type == "Month")
-        transaction.end_date += transaction.day_spread.months
-      elsif (transaction.spread_type == "Year")
-        transaction.end_date += transaction.day_spread.years
+    if (!@new_transaction.day_spread.nil?)
+      if(@new_transaction.spread_type == "Day")
+        @new_transaction.end_date += @new_transaction.day_spread.days
+      elsif (@new_transaction.spread_type == "Week")
+        @new_transaction.end_date += @new_transaction.day_spread.weeks
+      elsif (@new_transaction.spread_type == "Month")
+        @new_transaction.end_date += @new_transaction.day_spread.months
+      elsif (@new_transaction.spread_type == "Year")
+        @new_transaction.end_date += @new_transaction.day_spread.years
       end
     else
-      @new_transaction = Transaction.new
-      new()
       render 'new'
       return
     end
 
     
-    cat = transaction.category
+    cat = @new_transaction.category
 
     if (cat == "Personal Income" or cat == "Investment Income")
-      if (transaction.amount < 0)
-        transaction.amount *= -1
+      if (@new_transaction.amount < 0)
+        @new_transaction.amount *= -1
       end
     elsif (cat != "Other")
-      if (transaction.amount > 0)
-        transaction.amount *= -1
+      if (@new_transaction.amount > 0)
+         @new_transaction.amount *= -1
       end
     end
 
-    transaction.day_spread = (transaction.end_date - transaction.date).to_i
-    transaction.per_day = transaction.amount/(transaction.day_spread)
+    @new_transaction.day_spread = (@new_transaction.end_date - @new_transaction.date).to_i
+    @new_transaction.per_day = @new_transaction.amount/(@new_transaction.day_spread)
 
-    if (!transaction.save)
-      @new_transaction = Transaction.new
-      new()
+    if (!@new_transaction.save)
       render 'new'
       return
     end
@@ -66,49 +60,48 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    transaction = Transaction.find(params[:id])
+    @new_transaction = Transaction.find(params[:id])
 
-    if (!transaction.update_attributes(transaction_params))
+    if (!@new_transaction.update_attributes(transaction_params))
       return
     end
 
-    transaction.date = params[:transaction][:date]
-    transaction.end_date = transaction.date
+    @new_transaction.date = params[:transaction][:date]
+    @new_transaction.end_date = @new_transaction.date
 
-    transaction.spread_type = params[:transaction][:spread_type]
-    transaction.day_spread = params[:transaction][:day_spread]
+    @new_transaction.spread_type = params[:transaction][:spread_type]
+    @new_transaction.day_spread = params[:transaction][:day_spread]
 
-    # if (transaction.end_date.nil?)
+    # if (@new_transaction.end_date.nil?)
     #   redirect_to about_path
     #   return
     # end
 
-    if(transaction.spread_type == "Day")
-      transaction.end_date += transaction.day_spread.days
-    elsif (transaction.spread_type == "Week")
-      transaction.end_date += transaction.day_spread.weeks
-    elsif (transaction.spread_type == "Month")
-      transaction.end_date += transaction.day_spread.months
-    elsif (transaction.spread_type == "Year")
-      transaction.end_date += transaction.day_spread.years
+    if(@new_transaction.spread_type == "Day")
+      @new_transaction.end_date += @new_transaction.day_spread.days
+    elsif (@new_transaction.spread_type == "Week")
+      @new_transaction.end_date += @new_transaction.day_spread.weeks
+    elsif (@new_transaction.spread_type == "Month")
+      @new_transaction.end_date += @new_transaction.day_spread.months
+    elsif (@new_transaction.spread_type == "Year")
+      @new_transaction.end_date += @new_transaction.day_spread.years
     end
 
-    transaction.day_spread = (transaction.end_date - transaction.date).to_i
-    transaction.per_day = transaction.amount/(transaction.day_spread)
+    @new_transaction.day_spread = (@new_transaction.end_date - @new_transaction.date).to_i
+    @new_transaction.per_day = @new_transaction.amount/(@new_transaction.day_spread)
 
 
-    if (transaction.category == "Personal Income" or transaction.category == "Investment Income")
-      if (transaction.amount < 0)
-        transaction.amount *= -1
+    if (@new_transaction.category == "Personal Income" or @new_transaction.category == "Investment Income")
+      if (@new_transaction.amount < 0)
+        @new_transaction.amount *= -1
       end
-    elsif (transaction.category != "Other")
-      if (transaction.amount > 0)
-        transaction.amount *= -1
+    elsif (@new_transaction.category != "Other")
+      if (@new_transaction.amount > 0)
+        @new_transaction.amount *= -1
       end
     end
 
     if (!transaction.update_attributes(end_date: transaction.end_date, per_day: transaction.per_day, day_spread: transaction.day_spread))
-      edit()
       render 'edit'
       return
     end
