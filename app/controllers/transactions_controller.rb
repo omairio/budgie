@@ -12,26 +12,25 @@ class TransactionsController < ApplicationController
 
     # Spread amount over a few days
     type = 1
+    transaction.end_date = transaction.date
     if (!transaction.day_spread.nil?)
       if(transaction.spread_type == "Day")
-        type = 1
+        transaction.end_date += transaction.day_spread.days
       elsif (transaction.spread_type == "Week")
-        type = 7
+        transaction.end_date += transaction.day_spread.weeks
       elsif (transaction.spread_type == "Month")
-        type = 30
+        transaction.end_date += transaction.day_spread.months
       elsif (transaction.spread_type == "Year")
-        type = 365
+        transaction.end_date += transaction.day_spread.years
       end
-    else 
+    else
       @new_transaction = Transaction.new
       new()
       render 'new'
       return
     end
 
-    day_amount = transaction.day_spread * type
-    transaction.amount = transaction.amount/(day_amount)
-
+    
     cat = transaction.category
 
     if (cat == "Personal Income" or cat == "Investment Income")
@@ -44,21 +43,15 @@ class TransactionsController < ApplicationController
       end
     end
 
+    transaction.day_spread = (transaction.end_date - transaction.date).to_i
+    transaction.per_day = transaction.amount/(transaction.day_spread)
+
     if (!transaction.save)
       @new_transaction = Transaction.new
+      @LIFE = transaction
       new()
       render 'new'
       return
-    end    
-
-    i = 1
-    while i < (day_amount) do 
-      transaction_new = Transaction.new(transaction_params)
-      transaction_new.user_id = current_user.id
-      transaction_new.amount = transaction.amount
-      transaction_new.date = transaction.date + 1.days
-      transaction = transaction_new
-      i += 1
     end
 
     redirect_to root_path
@@ -68,18 +61,19 @@ class TransactionsController < ApplicationController
   def update
     transaction = Transaction.find(params[:id])
 
-    type = 1
-    if(transaction.spread_type == "Day")
-      type = 1
-    elsif (transaction.spread_type == "Week")
-      type = 7
-    elsif (transaction.spread_type == "Month")
-      type = 30
-    elsif (transaction.spread_type == "Year")
-      type = 365
-    end
+    transaction.end_date = transaction.date
+      if(transaction.spread_type == "Day")
+        transaction.end_date += transaction.day_spread.days
+      elsif (transaction.spread_type == "Week")
+        transaction.end_date += transaction.day_spread.weeks
+      elsif (transaction.spread_type == "Month")
+        transaction.end_date += transaction.day_spread.months
+      elsif (transaction.spread_type == "Year")
+        transaction.end_date += transaction.day_spread.years
+      end
 
-    transaction.per_day = transaction.amount/(transaction.day_spread * type)
+    transaction.day_spread = (transaction.end_date - transaction.date).to_i
+    transaction.per_day = transaction.amount/(transaction.day_spread)
 
     if (transaction.category == "Personal Income" or transaction.category == "Investment Income")
       if (transaction.amount < 0)
@@ -120,7 +114,7 @@ class TransactionsController < ApplicationController
       end
     end
   end
-  
+
   private
   def transaction_params
     params.require(:transaction).permit(:amount, :category, :date, :day_spread, :spread_type, :description)
