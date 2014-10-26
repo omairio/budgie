@@ -1,26 +1,27 @@
 module ApplicationHelper
 	def day_transaction(cdate)
-		current_user.transactions.where(date: Date.parse(cdate))
+		cdate = Date.parse(cdate)
+		current_user.transactions.where('date <= ? AND ? <= end_date', cdate, cdate)
 	end
 
 	def week_transaction(cdate)
 		start_date = Date.parse(cdate)
 		end_date = start_date + 1.weeks
-		current_user.transactions.where(date: start_date..end_date)
+		current_user.transactions.where('(date <= ? AND ? <= end_date) OR (date <= ? AND ? <= end_date) OR (date >= ? AND end_date <= ?)', start_date, start_date, end_date, end_date, start_date, end_date)
 		# current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
 	end
 
 	def month_transaction(cdate)
 		start_date = Date.parse(cdate)
 		end_date = start_date + 1.months
-		current_user.transactions.where(date: start_date..end_date)
+		current_user.transactions.where('(date <= ? AND ? <= end_date) OR (date <= ? AND ? <= end_date) OR (date >= ? AND end_date <= ?)', start_date, start_date, end_date, end_date, start_date, end_date)
 		# current_user.transactions.where("strftime('%Y', date) + 0 = ? and strftime('%m', date) + 0 = ?", Date.today.year, month)
 	end
 
 	def year_transaction(cdate)
 		start_date = Date.parse(cdate)
 		end_date = start_date + 1.years
-		current_user.transactions.where(date: start_date..end_date)
+		current_user.transactions.where('(date <= ? AND ? <= end_date) OR (date <= ? AND ? <= end_date) OR (date >= ? AND end_date <= ?)', start_date, start_date, end_date, end_date, start_date, end_date)
 		# current_user.transactions.where("strftime('%Y', date) + 0 = ?", year)
 	end
 
@@ -78,26 +79,28 @@ module ApplicationHelper
 
 		end
 		@transactions.each do |t|
-
+			amount = t.amount/((current_user.date - t.end_date).to_i)
 			if (current_user.date_type == 'Day' or current_user.date_type == "All")
 				@date_list << ""
-				@date_transaction_list << t.amount
+				amount = t.amount
+				@date_transaction_list << amount
 			elsif (current_user.date_type == "Week")
-				date_hash[t.date.strftime("%a")] += t.amount
+
+				date_hash[t.date.strftime("%a")] += amount
 			elsif (current_user.date_type == "Month")
-				date_hash[t.date.strftime("%d/%m")] += t.amount
+				date_hash[t.date.strftime("%d/%m")] += amount
 			elsif (current_user.date_type == "Year")
-				date_hash[t.date.strftime("%b")] += t.amount
+				date_hash[t.date.strftime("%b")] += amount
 			end
 
-			if (t.amount < 0)
-				@category_hash[t.category] -= t.amount
+			if (amount < 0)
+				@category_hash[t.category] -= amount
 			else 
-				@category_hash[t.category] += t.amount
+				@category_hash[t.category] += amount
 			end
 	
 
-			@total += t.amount
+			@total += amount
 		end
 
 		date_hash.keys.each do |k|

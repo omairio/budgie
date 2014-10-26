@@ -19,10 +19,11 @@ class Transaction < ActiveRecord::Base
 		presence: true,
 		})
 
+
 	# Day spread has a max value of the number of days in a year
 	validates(:day_spread, {
 		presence: true,
-		numericality: {greater_than: 0, less_than: 5}
+		numericality: {greater_than: 0}
 		})
 
 	# validates(:per_day, {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141022235228) do
+ActiveRecord::Schema.define(version: 20141026044623) do
 
   create_table "transactions", force: true do |t|
     t.float    "amount"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20141022235228) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "spread_type"
+    t.date     "end_date"
   end
 
   create_table "users", force: true do |t|

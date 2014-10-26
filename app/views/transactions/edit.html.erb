@@ -6,7 +6,7 @@
 
 	<%= form_for(@transaction, :method => "patch") do |f| %>
 	<%= render 'shared/error_messages' %>
-	<%= f.text_field :amount, placeholder: "amount" %>
+	<%= f.text_field :amount, placeholder: "amount", number_with_precision: 2 %>
 
 	<div>
 		<input type="text" id="transaction" data-provide='datepicker' data-date-format="dd/mm/yyyy" value="<%= @transaction.date.strftime("%d/%m/%Y") %>"  data-todayBtn="linked" name="transaction[date]">
