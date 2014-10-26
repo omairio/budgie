@@ -46,7 +46,13 @@
             <% if (t.end_date - t.date).to_i > 1 %>
             ~ <%= (t.end_date - 1.days).strftime("%A %d/%m/%y") %>
             <% end %></th> 
-            <td><%= sprintf("%.2f",t.per_day) %> per day</td>
+            <td>
+            <% fake_per_day = t.per_day %>
+            <% if fake_per_day < 0 %>
+            <% fake_per_day *= -1 %>-
+            <% end %>
+            <%= sprintf("$%.2f",fake_per_day) %> per day
+            </td>
           </tr>
         </thead>
 

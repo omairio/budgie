@@ -59,7 +59,12 @@
         <h1>59%</h1>
         <p>of your previous month's expenditure.</p> -->
         <p>You have saved</p>
-        <h1><%= sprintf("%.2f", @total) %></h1>
+        <h1>
+        <% fake_total = @total %>
+        <% if fake_total < 0 %>
+          <% fake_total *= -1 %>-
+        <% end %>
+        <%= sprintf("$%.2f", fake_total) %></h1>
          <p>
           <% if current_user.date_type == "Day" %>
           <% if (current_user.date == Date.today) %>
