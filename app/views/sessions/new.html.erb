@@ -84,7 +84,9 @@
           </table> 
           <% end %>
 
-          <%= will_paginate @transactions %>
+          <div class="pagination">
+            <%= will_paginate @transactions, renderer: BootstrapPagination::Rails %>
+          </div>
         </div>   
 
         <% end %>
