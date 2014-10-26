@@ -2,7 +2,7 @@
 		<select id="transaction_spread_number" name="transaction[day_spread]">
 		<% i = 1 %>
 		<% while i <= 10 %>
-			<option value="<%= i %>" <% if !@transaction.nil? and @transaction.day_spread %> selected="selected" <% end %> >
+			<option value="<%= i %>" <% if !@transaction.nil? and @transaction.day_spread == i %> selected="selected" <% end %> >
 			<%= i %>
 			</option>
 		<% i += 1 %>
@@ -15,7 +15,7 @@
 		<select id="transaction_spread_type" name="transaction[spread_type]">
 		<% spread_types = get_spread_types() %>
 		<% spread_types.each do |s| %>
-			<option value="<%= s %>" <% if !@transaction.nil? and @transaction.spread_type %> selected="selected" <% end %> >
+			<option value="<%= s %>" <% if !@transaction.nil? and @transaction.spread_type == s %> selected="selected" <% end %> >
 				<%= s %>
 			</option>
 		<% end %>

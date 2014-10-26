@@ -101,7 +101,7 @@ class TransactionsController < ApplicationController
       end
     end
 
-    if (!transaction.update_attributes(end_date: transaction.end_date, per_day: transaction.per_day, day_spread: transaction.day_spread))
+    if (!@new_transaction.update_attributes(end_date: @new_transaction.end_date, per_day: @new_transaction.per_day, day_spread: @new_transaction.day_spread))
       render 'edit'
       return
     end
