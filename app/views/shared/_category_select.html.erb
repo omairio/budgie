@@ -2,7 +2,7 @@
 		<select id="transaction_spread_number" name="transaction[day_spread]">
 		<% i = 1 %>
 		<% while i <= 10 %>
-			<option value="<%= i %>" <% if !@transaction.nil? and @transaction.day_spread == i %> selected="selected" <% end %> >
+			<option value="<%= i %>" <% if !@transaction.nil? and !@transaction.original_spread.nil? and @transaction.original_spread == i %> selected="selected" <% end %> >
 			<%= i %>
 			</option>
 		<% i += 1 %>

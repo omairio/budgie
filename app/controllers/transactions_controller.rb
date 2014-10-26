@@ -13,7 +13,8 @@ class TransactionsController < ApplicationController
     # Spread amount over a few days
     @new_transaction.end_date = @new_transaction.date
     @new_transaction.per_day = 0
-
+    @new_transaction.original_spread = @new_transaction.day_spread
+    
     if (!@new_transaction.save)
       render 'new'
       return
@@ -71,12 +72,8 @@ class TransactionsController < ApplicationController
 
     @new_transaction.spread_type = params[:transaction][:spread_type]
     @new_transaction.day_spread = params[:transaction][:day_spread]
-
-    # if (@new_transaction.end_date.nil?)
-    #   redirect_to about_path
-    #   return
-    # end
-
+    @new_transaction.original_spread = @new_transaction.day_spread
+ 
     if(@new_transaction.spread_type == "Day")
       @new_transaction.end_date += @new_transaction.day_spread.days
     elsif (@new_transaction.spread_type == "Week")
