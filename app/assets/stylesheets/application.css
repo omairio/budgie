@@ -15,7 +15,6 @@
  *= require flat-ui
  *= require bootstrap-datepicker
  *= require flat-ui
- *= require_self
  *= require_tree .
  */
 

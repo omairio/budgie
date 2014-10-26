@@ -34,16 +34,16 @@ table th + th
 }
 
 .pagination {
-	background: #f1f1f1;
- 	border: 1px solid #e5e5e5;
-  	text-align: center;
-  	padding: 1em;
-	cursor: default;
-	a, .apple_pagination span {
+background: #f1f1f1;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+  padding: 1em;
+  cursor: default; }
+  .apple_pagination a, .apple_pagination span {
     padding: 0.2em 0.3em; }
-  .disabled {
+  .apple_pagination .disabled {
     color: #aaaaaa; }
-  .current {
+  .apple_pagination .current {
     font-style: normal;
     font-weight: bold;
     background-color: #bebebe;
@@ -55,12 +55,11 @@ table th + th
     -webkit-border-radius: 1em;
     border-radius: 1em;
     text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px; }
-  a {
+  .apple_pagination a {
     text-decoration: none;
     color: black; }
-   a:hover, .apple_pagination a:focus {
+    .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline;
-  }
 }
 
 tbody {
