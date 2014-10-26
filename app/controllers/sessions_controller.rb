@@ -36,7 +36,6 @@ class SessionsController < ApplicationController
       id = params[:session][:email]
       user = User.find_by(email: id)
       if (user && user.authenticate(params[:session][:password]))
-          @error = "Poop"
           sign_in user
       else
           if (!user)
@@ -45,6 +44,8 @@ class SessionsController < ApplicationController
             @error = "Password invalid"
           end
       end
+      current_user.update_attributes(:date_type => "Day", :date => Date.today)
+      @transactions = day_transaction(current_user.date.strftime("%d/%m/%Y"))
       @new_session = 'cool'
       render 'new'
     end
