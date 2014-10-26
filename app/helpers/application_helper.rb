@@ -30,13 +30,13 @@ module ApplicationHelper
 
 	def get_total()
 		@total = 0
-		@transaction_list = Array.new()
-		@date_list = Array.new()
-		date_hash = Hash.new(0)
-		@category_list = Array.new()
-		category_hash = Hash.new(0)
-
 		if (!current_user.date_type.nil?)
+			@date_transaction_list = Array.new()
+			@date_list = Array.new()
+			date_hash = Hash.new(0)
+			@category_transaction_list = Array.new()
+			@category_hash = Hash.new(0)
+
 			if (current_user.date_type == 'All')
 				@transactions = all_transactions()
 			elsif (current_user.date_type == 'Day')
@@ -81,7 +81,7 @@ module ApplicationHelper
 
 			if (current_user.date_type == 'Day' or current_user.date_type == "All")
 				@date_list << ""
-				@transaction_list << t.amount
+				@date_transaction_list << t.amount
 			elsif (current_user.date_type == "Week")
 				date_hash[t.date.strftime("%a")] += t.amount
 			elsif (current_user.date_type == "Month")
@@ -89,12 +89,25 @@ module ApplicationHelper
 			elsif (current_user.date_type == "Year")
 				date_hash[t.date.strftime("%b")] += t.amount
 			end
+
+			if (t.amount < 0)
+				@category_hash[t.category] -= t.amount
+			else 
+				@category_hash[t.category] += t.amount
+			end
+	
+
 			@total += t.amount
 		end
 
 		date_hash.keys.each do |k|
-			@transaction_list << date_hash[k]
+			@date_transaction_list << date_hash[k]
 		end
+
+		# @category_hash.keys.each do |c| 
+		# 	@category_transaction_list << @category_hash[c]
+		# end
+
 		@total
 	end
 
